@@ -1,0 +1,54 @@
+---
+title: "30. Olympic Fund Run"
+description: "Route 30 from Running Around Portland (1979): a low-hill 6.2-mile loop on Lake Oswego's north side, home to the annual Olympic Fund Run."
+routeNumber: 30
+section: "Suburban West Side"
+distanceMiles: 6.2
+distanceKm: 10
+difficulty: 4
+beginningPoint: "Lake Oswego Junior High School"
+lat: 45.421
+lng: -122.67
+runningSurface: "Paved road"
+routeConditions:
+  aesthetics: 7
+  badWeatherRunning: 10
+  autoTraffic: 4
+routeMap:
+  src: "./map.jpg"
+  alt: "Hand-drawn course map for the Olympic Fund Run"
+  caption: "Course map from the original book."
+---
+
+import RouteStats from "@/components/blog/RouteStats.astro";
+
+<RouteStats
+	routeNumber={frontmatter.routeNumber}
+	section={frontmatter.section}
+	distanceMiles={frontmatter.distanceMiles}
+	distanceKm={frontmatter.distanceKm}
+	difficulty={frontmatter.difficulty}
+	beginningPoint={frontmatter.beginningPoint}
+	runningSurface={frontmatter.runningSurface}
+	suggestedBy={frontmatter.suggestedBy}
+	conditions={frontmatter.routeConditions}
+/>
+
+<blockquote>
+
+The Lake Oswego area is a runners paradise, with its seemingly endless miles of rustic roads and charming country lanes bordering the lake. This course, which includes portions of the north side of the lake, is the scene of the annual Olympic Fund Run and includes a fine sampling of this area without many hills.
+
+If you are approaching the start from Portland via the Macadam-State Street route, turn right at "A" Street (stop light) and follow it up through town as it jogs right and becomes Country Club Road. Stay on Country Club Road until you come to the Junior High on your left.
+
+Park in the lot and run back down Country Club, all the way to the intersection with "A" Street, bearing right there down Chandler to Iron Mountain Road. There's just a short jog along State Street before you go left on Northshore and retrace your steps.
+
+</blockquote>
+
+![Hand-drawn course map for the Olympic Fund Run](./map.jpg)
+
+_Course map from the original book._
+
+![A runner in motion, captured with a blurred panning shot](./photo.jpg)
+
+_Photograph by Ancil Nance, from the original book._
+

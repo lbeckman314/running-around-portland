@@ -1,0 +1,128 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import { postHref } from "@/data/post";
+
+// Home-page tile styled like an iOS home-screen app: a rounded-square "icon"
+// cropped from the route's hand-drawn map, with a short label underneath.
+type Props = {
+	post: CollectionEntry<"post">;
+};
+
+const { post } = Astro.props;
+const { data } = post;
+const title = data.routeNumber !== undefined ? data.title.replace(/^\d+\.\s*/, "") : data.title;
+const meta = [
+	data.distanceMiles !== undefined ? `${data.distanceMiles} mi` : undefined,
+	data.difficulty !== undefined ? `difficulty ${data.difficulty}/10` : undefined,
+]
+	.filter((part) => part !== undefined)
+	.join(" · ");
+---
+
+<a class="route-app group flex flex-col items-center no-underline" href={postHref(post)}>
+	<span class="route-app-icon">
+		{
+			data.routeMap ? (
+				<Image src={data.routeMap.src} alt="" width={240} class="route-app-img" />
+			) : (
+				<span class="route-app-fallback" aria-hidden="true">
+					{title.charAt(0)}
+				</span>
+			)
+		}
+		{
+			data.routeNumber !== undefined && (
+				<span class="route-app-badge" aria-hidden="true">
+					{data.routeNumber}
+				</span>
+			)
+		}
+	</span>
+	<span class="route-app-label group-hover:decoration-link mt-2 text-center text-xs font-semibold leading-tight underline-offset-2 group-hover:underline group-hover:decoration-2">
+		{title}
+	</span>
+	{meta && <span class="text-muted mt-0.5 text-center text-xs leading-tight">{meta}</span>}
+	{data.draft && <span class="text-xs font-semibold text-red-500">(Draft)</span>}
+</a>
+
+<style>
+	.route-app {
+		width: 100%;
+		max-width: 7.5rem;
+		margin-inline: auto;
+	}
+
+	.route-app-icon {
+		position: relative;
+		display: block;
+		width: 100%;
+		aspect-ratio: 1;
+		/* ~22% radius approximates the iOS icon squircle. */
+		border-radius: 22%;
+		overflow: hidden;
+		background: #fffaf3;
+		box-shadow:
+			0 1px 2px rgb(0 0 0 / 0.12),
+			0 4px 12px rgb(0 0 0 / 0.1);
+		transition:
+			transform 150ms ease,
+			box-shadow 150ms ease;
+	}
+
+	.route-app:hover .route-app-icon,
+	.route-app:focus-visible .route-app-icon {
+		transform: translateY(-2px) scale(1.04);
+		box-shadow:
+			0 2px 4px rgb(0 0 0 / 0.14),
+			0 8px 20px rgb(0 0 0 / 0.16);
+	}
+
+	.route-app:active .route-app-icon {
+		transform: scale(0.95);
+	}
+
+	.route-app-img {
+		width: 100%;
+		height: 100%;
+		/* The scans are tall (map above, elevation profile below); crop to the map. */
+		object-fit: cover;
+		object-position: top;
+	}
+
+	.route-app-fallback {
+		display: grid;
+		place-items: center;
+		width: 100%;
+		height: 100%;
+		background: var(--color-accent);
+		color: var(--color-global-bg);
+		font-family: var(--font-shrikhand);
+		font-size: 2.5rem;
+	}
+
+	/* Notification-style badge in the top-right corner. */
+	.route-app-badge {
+		position: absolute;
+		top: 6%;
+		right: 6%;
+		min-width: 1.5rem;
+		height: 1.5rem;
+		padding-inline: 0.35rem;
+		display: grid;
+		place-items: center;
+		border-radius: 999px;
+		background: var(--color-accent);
+		color: var(--color-global-bg);
+		font-size: 0.7rem;
+		font-weight: 700;
+		box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+	}
+
+	.route-app-label {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+</style>

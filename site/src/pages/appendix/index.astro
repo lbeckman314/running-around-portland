@@ -1,0 +1,50 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "The four appendices from Running Around Portland (1979): running organizations, an annual runs calendar, and calorie/aerobic tables.",
+	title: "Appendices",
+};
+
+const pages = [
+	{
+		href: "/appendix/running-organizations/",
+		title: "Running Organizations and Publications",
+		description: "Clubs, publications, and fitness programs available to Portland-area runners in 1979.",
+	},
+	{
+		href: "/appendix/annual-runs-calendar/",
+		title: "Calendar of Annual Runs",
+		description: "A year-round schedule of organized runs around Portland and Vancouver (April–June missing, pending rescan).",
+	},
+	{
+		href: "/appendix/calorie-table/",
+		title: "Calorie Table",
+		description: "Calories used per mile and per minute of running, by weight and pace.",
+	},
+	{
+		href: "/appendix/aerobic-point-tables/",
+		title: "Aerobic Point Tables",
+		description: "Aerobic point values for walking and running distances of one to fifteen miles.",
+	},
+];
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-2">Appendices</h1>
+	<p class="text-muted mb-12">
+		The four appendices from the back of <em>Running Around Portland</em> (1979).
+	</p>
+	<ul class="space-y-6">
+		{
+			pages.map((p) => (
+				<li>
+					<a class="cactus-link text-lg font-semibold" href={p.href}>
+						{p.title}
+					</a>
+					<p class="text-muted mt-1 text-sm">{p.description}</p>
+				</li>
+			))
+		}
+	</ul>
+</PageLayout>

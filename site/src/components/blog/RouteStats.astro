@@ -1,0 +1,140 @@
+---
+interface Conditions {
+	aesthetics?: number;
+	badWeatherRunning?: number;
+	autoTraffic?: number;
+}
+
+interface Props {
+	routeNumber?: number;
+	section?: string;
+	distanceMiles?: number;
+	distanceKm?: number;
+	distanceLabel?: string;
+	difficulty?: number;
+	beginningPoint?: string;
+	runningSurface?: string;
+	suggestedBy?: string;
+	conditions?: Conditions;
+}
+
+const {
+	routeNumber,
+	section,
+	distanceMiles,
+	distanceKm,
+	distanceLabel,
+	difficulty,
+	beginningPoint,
+	runningSurface,
+	suggestedBy,
+	conditions,
+} = Astro.props;
+
+const conditionRows: Array<[string, number | undefined]> = [
+	["Aesthetics", conditions?.aesthetics],
+	["Bad weather running", conditions?.badWeatherRunning],
+	["Auto traffic", conditions?.autoTraffic],
+];
+
+const distance =
+	distanceLabel ??
+	(distanceMiles !== undefined
+		? `${distanceMiles} mi${distanceKm !== undefined ? ` (${distanceKm} km)` : ""}`
+		: undefined);
+---
+
+<aside
+	class="not-prose my-8 rounded-lg border border-muted/30 bg-quote/5 p-5"
+	aria-label="Route stats"
+>
+	{
+		(routeNumber !== undefined || section) && (
+			<p class="mb-3 text-xs tracking-wide text-muted uppercase">
+				{routeNumber !== undefined ? `Route ${routeNumber}` : ""}
+				{routeNumber !== undefined && section ? " · " : ""}
+				{section}
+			</p>
+		)
+	}
+
+	<dl class="grid gap-3">
+		{
+			distance && (
+				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+					<dt class="text-sm font-semibold text-muted">Distance</dt>
+					<dd class="m-0">{distance}</dd>
+				</div>
+			)
+		}
+
+		{
+			difficulty !== undefined && (
+				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+					<dt class="text-sm font-semibold text-muted">Difficulty</dt>
+					<dd class="m-0 flex items-center gap-2">
+						<span
+							class="inline-block h-2 w-24 overflow-hidden rounded-full bg-muted/30"
+							aria-hidden="true"
+						>
+							<span
+								class="block h-full bg-accent"
+								style={`width: ${(difficulty / 10) * 100}%`}
+							/>
+						</span>
+						<span>{difficulty} / 10</span>
+					</dd>
+				</div>
+			)
+		}
+
+		{
+			beginningPoint && (
+				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+					<dt class="text-sm font-semibold text-muted">Beginning point</dt>
+					<dd class="m-0">{beginningPoint}</dd>
+				</div>
+			)
+		}
+
+		{
+			runningSurface && (
+				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+					<dt class="text-sm font-semibold text-muted">Running surface</dt>
+					<dd class="m-0">{runningSurface}</dd>
+				</div>
+			)
+		}
+
+		{
+			conditionRows.some(([, value]) => value !== undefined) && (
+				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+					<dt class="text-sm font-semibold text-muted">
+						Conditions
+						<span class="block text-xs font-normal">(best = 10)</span>
+					</dt>
+					<dd class="m-0">
+						<ul class="grid list-none gap-1 p-0">
+							{conditionRows.map(([label, value]) =>
+								value !== undefined ? (
+									<li>
+										{label}: <strong>{value}</strong>/10
+									</li>
+								) : null,
+							)}
+						</ul>
+					</dd>
+				</div>
+			)
+		}
+
+		{
+			suggestedBy && (
+				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+					<dt class="text-sm font-semibold text-muted">Suggested by</dt>
+					<dd class="m-0">{suggestedBy}</dd>
+				</div>
+			)
+		}
+	</dl>
+</aside>

@@ -1,0 +1,102 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "Calories used per mile and per minute of running, by weight and pace — from Running Around Portland (1979).",
+	title: "Calorie Table",
+};
+
+const paces = ["5:20", "6:00", "6:40", "7:20", "8:00", "8:40", "9:20", "10:00", "10:40"];
+
+const perMile: [number, number[]][] = [
+	[120, [83, 83, 81, 80, 79, 78, 77, 76, 75]],
+	[130, [90, 89, 88, 87, 85, 84, 83, 82, 81]],
+	[140, [97, 95, 94, 93, 92, 91, 89, 88, 87]],
+	[150, [103, 102, 101, 99, 98, 97, 95, 94, 93]],
+	[160, [110, 109, 107, 106, 104, 103, 101, 100, 99]],
+	[170, [117, 115, 113, 112, 111, 109, 107, 106, 105]],
+	[180, [123, 121, 120, 119, 117, 115, 114, 112, 111]],
+	[190, [130, 128, 127, 125, 123, 121, 120, 118, 117]],
+	[200, [137, 135, 133, 131, 129, 128, 126, 124, 123]],
+	[210, [143, 141, 139, 137, 136, 134, 132, 130, 129]],
+	[220, [150, 148, 146, 144, 142, 140, 138, 136, 135]],
+];
+
+const perMinute: [number, number[]][] = [
+	[120, [15.6, 13.8, 12.1, 10.9, 9.9, 9.0, 8.3, 7.6, 7.0]],
+	[130, [16.9, 14.8, 13.2, 11.8, 10.7, 9.7, 8.9, 8.2, 7.6]],
+	[140, [18.1, 15.9, 14.1, 12.6, 11.5, 10.5, 9.6, 8.8, 8.1]],
+	[150, [19.4, 17.0, 15.1, 13.5, 12.3, 11.2, 10.2, 9.4, 8.7]],
+	[160, [20.6, 18.1, 16.1, 14.5, 13.0, 11.8, 10.9, 10.0, 9.3]],
+	[170, [21.9, 19.2, 17.0, 15.3, 13.8, 12.7, 11.5, 10.6, 9.8]],
+	[180, [23.1, 20.2, 18.0, 16.2, 14.6, 13.3, 12.2, 11.2, 10.4]],
+	[190, [24.4, 21.3, 19.0, 17.0, 15.4, 14.0, 12.9, 11.8, 10.9]],
+	[200, [25.6, 22.4, 19.9, 17.9, 16.2, 14.8, 13.5, 12.4, 11.5]],
+	[210, [26.9, 23.6, 20.9, 18.7, 17.0, 15.5, 14.1, 13.0, 12.1]],
+	[220, [28.1, 24.7, 21.9, 19.6, 17.8, 16.2, 14.8, 13.6, 12.6]],
+];
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-2">Calorie Table</h1>
+	<p class="text-muted mb-12 text-sm">
+		Appendix from <em>Running Around Portland</em> (1979), reprinted there with permission from{" "}
+		<em>Jog, Run, Race</em> by Joe Henderson (consulting editor of <em>Runner's World</em> magazine),
+		World Publications, Mountain View, Ca., 1977.
+	</p>
+
+	<h2 class="title mb-4 text-lg">Calories used per mile of running</h2>
+	<div class="not-prose mb-4 overflow-x-auto">
+		<table class="w-full min-w-[600px] border-collapse text-sm">
+			<thead>
+				<tr class="border-b border-dashed border-muted/50">
+					<th class="py-1 pr-4 text-left font-semibold">Weight (lb)</th>
+					{paces.map((p) => <th class="px-2 py-1 text-right font-semibold">{p}</th>)}
+				</tr>
+				<tr class="text-muted text-xs">
+					<th class="text-left font-normal">&nbsp;</th>
+					<th colspan={paces.length} class="text-center font-normal">Pace per mile</th>
+				</tr>
+			</thead>
+			<tbody>
+				{perMile.map(([weight, values]) => (
+					<tr>
+						<td class="py-0.5 pr-4">{weight}</td>
+						{values.map((v) => <td class="px-2 py-0.5 text-right">{v}</td>)}
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+	<p class="text-muted mb-10 text-sm">
+		<strong>Note:</strong> expenditure of 3500 calories equals one-pound weight loss.
+	</p>
+
+	<h2 class="title mb-4 text-lg">Calories used per minute</h2>
+	<div class="not-prose mb-4 overflow-x-auto">
+		<table class="w-full min-w-[600px] border-collapse text-sm">
+			<thead>
+				<tr class="border-b border-dashed border-muted/50">
+					<th class="py-1 pr-4 text-left font-semibold">Weight (lb)</th>
+					{paces.map((p) => <th class="px-2 py-1 text-right font-semibold">{p}</th>)}
+				</tr>
+				<tr class="text-muted text-xs">
+					<th class="text-left font-normal">&nbsp;</th>
+					<th colspan={paces.length} class="text-center font-normal">Pace per mile</th>
+				</tr>
+			</thead>
+			<tbody>
+				{perMinute.map(([weight, values]) => (
+					<tr>
+						<td class="py-0.5 pr-4">{weight}</td>
+						{values.map((v) => <td class="px-2 py-0.5 text-right">{v}</td>)}
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+
+	<p class="mt-12">
+		<a class="cactus-link" href="/appendix/">← Back to appendices</a>
+	</p>
+</PageLayout>

@@ -1,0 +1,55 @@
+---
+title: "39. Vancouver Lake Run"
+description: "Route 39 from Running Around Portland (1979): a flat, quiet 3.4-mile out-and-back along the desolate shore of Vancouver Lake."
+routeNumber: 39
+section: "Clark County"
+distanceMiles: 3.4
+distanceKm: 5.4
+difficulty: 2
+beginningPoint: "Vancouver Lake Park"
+lat: 45.666
+lng: -122.716
+runningSurface: "Paved road"
+suggestedBy: "Bob Moser"
+routeConditions:
+  aesthetics: 8
+  badWeatherRunning: 10
+  autoTraffic: 8
+routeMap:
+  src: "./map.jpg"
+  alt: "Hand-drawn course map for the Vancouver Lake Run"
+  caption: "Course map from the original book."
+---
+
+import RouteStats from "@/components/blog/RouteStats.astro";
+
+<RouteStats
+	routeNumber={frontmatter.routeNumber}
+	section={frontmatter.section}
+	distanceMiles={frontmatter.distanceMiles}
+	distanceKm={frontmatter.distanceKm}
+	difficulty={frontmatter.difficulty}
+	beginningPoint={frontmatter.beginningPoint}
+	runningSurface={frontmatter.runningSurface}
+	suggestedBy={frontmatter.suggestedBy}
+	conditions={frontmatter.routeConditions}
+/>
+
+<blockquote>
+
+Few Portlanders have ever seen Vancouver Lake -- a huge body of water lying only a few minutes from downtown Vancouver, yet curiously desolate in a way you can only appreciate by going there. This is a fine run if you're hunting for a rural stretch that is quiet, relatively scenic and flat as a pancake.
+
+To get there, take the Fourth Plain Exit off I-5 in Vancouver and cross back over the freeway, bearing right in a few blocks to 26th. Drive west on 26th as it turns into Lower River Road and follow the BIKE PATH signs to Vancouver Lake Park. The park has restrooms, water and a phone.
+
+Run north to the end of the pavement and turn around there. For an additional option upon returning to the park, continue on south to the "T" intersection and come back, adding another .6 mi (1km.).
+
+</blockquote>
+
+![Hand-drawn course map for the Vancouver Lake Run](./map.jpg)
+
+_Course map from the original book._
+
+![An older runner in mid-stride along a rural road](./photo.jpg)
+
+_Photograph by Ancil Nance, from the original book._
+

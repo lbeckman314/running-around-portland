@@ -1,0 +1,35 @@
+---
+import { render } from "astro:content";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { getAllPosts, postSlug } from "@/data/post";
+import PostLayout from "@/layouts/BlogPost.astro";
+
+// if you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
+export const getStaticPaths = (async () => {
+	const blogEntries = await getAllPosts();
+	// Route posts link to their neighbours in book order.
+	const routes = blogEntries
+		.filter((post) => post.data.routeNumber !== undefined)
+		.sort((a, b) => (a.data.routeNumber ?? 0) - (b.data.routeNumber ?? 0));
+	return blogEntries.map((post) => {
+		const i = routes.indexOf(post);
+		return {
+			params: { slug: postSlug(post) },
+			props: {
+				post,
+				prevRoute: i > 0 ? routes[i - 1] : undefined,
+				nextRoute: i !== -1 ? routes[i + 1] : undefined,
+			},
+		};
+	});
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { post, prevRoute, nextRoute } = Astro.props;
+const { Content } = await render(post);
+---
+
+<PostLayout post={post} prevRoute={prevRoute} nextRoute={nextRoute}>
+	<Content />
+</PostLayout>

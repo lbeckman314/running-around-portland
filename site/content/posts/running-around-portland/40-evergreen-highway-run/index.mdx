@@ -1,0 +1,57 @@
+---
+title: "40. Evergreen Highway Run"
+description: "Route 40 from Running Around Portland (1979): an 11.8-mile Columbia River course from Wintler Park along the Evergreen Highway toward Camas."
+routeNumber: 40
+section: "Clark County"
+distanceMiles: 11.8
+distanceKm: 18.9
+difficulty: 9
+beginningPoint: "Wintler Bicentennial Park, on Hwy. 14 to Camas"
+lat: 45.612
+lng: -122.628
+runningSurface: "Paved roads, some gravel"
+suggestedBy: "Wes Christenson"
+routeConditions:
+  aesthetics: 7
+  badWeatherRunning: 9
+  autoTraffic: 6
+routeMap:
+  src: "./map.jpg"
+  alt: "Hand-drawn course map for the Evergreen Highway Run"
+  caption: "Course map from the original book."
+---
+
+import RouteStats from "@/components/blog/RouteStats.astro";
+
+<RouteStats
+	routeNumber={frontmatter.routeNumber}
+	section={frontmatter.section}
+	distanceMiles={frontmatter.distanceMiles}
+	distanceKm={frontmatter.distanceKm}
+	difficulty={frontmatter.difficulty}
+	beginningPoint={frontmatter.beginningPoint}
+	runningSurface={frontmatter.runningSurface}
+	suggestedBy={frontmatter.suggestedBy}
+	conditions={frontmatter.routeConditions}
+/>
+
+<blockquote>
+
+A year or so ago the ORRC publication, "The Oregon Distant Runner", invited readers to write in their descriptions of a favorite run. A Vancouver runner, Wes Christenson, was so ecstatic over this route that he devoted a 20 stanza epic poem to praising its virtues. This run -- away from the tumult of the city -- is undoubtedly the finest Columbia river course in the metro area.
+
+Cross the Interstate Bridge, follow the signs to Camas and you're on Highway 14. Travel about three miles, turn off at the Evergreen Boulevard/Riverside Drive Exit, and follow the signs to Wintler Bicentennial Park.
+
+The hard part is first, so start out running back up the hill the way you came, going right at the stop sign (following the BIKE ROUTE signs) to Riverside Drive. Run a half mile more to Chelsea Street, up the hill, and right to the Evergreen Highway. Now, shift into "automatic pilot" and remember everything you've read abouth metaphysical benefits of running. Coast along the flats and enjoy the Columbia, the wind, Mt. Hood and more.
+
+Following the map, go up the highway, turn right at 164th, and come back along the railroad tracks. Water and restrooms are available at the Texaco Station.
+
+</blockquote>
+
+![Hand-drawn course map for the Evergreen Highway Run](./map.jpg)
+
+_Course map from the original book._
+
+![A path through trees along the Columbia River](./photo.jpg)
+
+_Photograph by Ancil Nance, from the original book._
+

@@ -1,0 +1,294 @@
+@layer theme, base, pagefind, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* tailwind to ignore satori generated og-image */
+@source not "../pages/og-image";
+/* config for tailwindcss-typography plugin */
+@config "../../tailwind.config.ts";
+
+/* use a selector-based strategy for dark mode */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@font-face {
+	font-family: "Shrikhand";
+	src: url("../assets/shrikhand-regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* register custom colour properties */
+@property --color-global-bg {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #fafafa;
+}
+@property --color-global-text {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #22272a;
+}
+@property --color-muted {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #4a5565;
+}
+@property --color-link {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #3f5f5a;
+}
+@property --color-accent {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #531a4a;
+}
+@property --color-accent-2 {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #121212;
+}
+@property --color-quote {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #531a4a;
+}
+@property --color-section-band {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #d1c8f4;
+}
+@property --color-chrome-band {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #531a4a;
+}
+
+/* you could refactor below to use light-dark(), depending on your target audience */
+@theme {
+	--color-global-bg: #fcf0f0;
+	--color-global-text: #22272a;
+	--color-muted: #4a5565;
+	--color-link: #3f5f5a;
+	--color-accent: #531a4a;
+	--color-accent-2: #121212;
+	--color-quote: #531a4a;
+	--color-section-band: #d1c8f4;
+	--color-chrome-band: #531a4a;
+	--font-shrikhand: "Shrikhand", cursive;
+	/* Long-form reading text. System serifs only (no download): New York /
+	   Iowan Old Style / Charter on Apple, Sitka / Cambria on Windows. */
+	--font-reading: ui-serif, "Iowan Old Style", Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+}
+
+@layer base {
+	html {
+		/* Dark theme is disabled for now (nothing sets data-theme="dark"
+		   anymore — see Base.astro/Header.astro) — pinning this to "light"
+		   stops native browser chrome (scrollbars, form controls) from
+		   following the OS's dark preference on its own. Re-adding dark mode
+		   later just means restoring "light dark" here plus the two removed
+		   imports; everything else (the [data-theme="dark"] overrides below,
+		   ThemeProvider.astro, ThemeToggle.astro) is still intact. */
+		color-scheme: light;
+		accent-color: var(--color-accent);
+		scrollbar-gutter: stable;
+		background-color: var(--color-global-bg);
+
+		&[data-theme="light"] {
+			color-scheme: light;
+		}
+
+		&[data-theme="dark"] {
+			color-scheme: dark;
+			--color-global-bg: #1d1f20;
+			--color-global-text: #333;
+			--color-muted: #333;
+			--color-link: #d482ab;
+			/* --color-accent: #2abc89; */
+			--color-accent-2: #333;
+			--color-quote: #cdffb8;
+			/* --color-section-band: #1f3b33; */
+		}
+
+		--color-mode-transition-duration: 300ms;
+		--color-mode-transition-easing: ease-in-out;
+
+		transition:
+			--color-global-bg var(--color-mode-transition-duration) var(--color-mode-transition-easing),
+			--color-global-text var(--color-mode-transition-duration) var(--color-mode-transition-easing),
+			--color-muted var(--color-mode-transition-duration) var(--color-mode-transition-easing),
+			--color-link var(--color-mode-transition-duration) var(--color-mode-transition-easing),
+			--color-accent var(--color-mode-transition-duration) var(--color-mode-transition-easing),
+			--color-accent-2 var(--color-mode-transition-duration) var(--color-mode-transition-easing),
+			--color-quote var(--color-mode-transition-duration) var(--color-mode-transition-easing),
+			--color-section-band var(--color-mode-transition-duration) var(--color-mode-transition-easing),
+			--color-chrome-band var(--color-mode-transition-duration) var(--color-mode-transition-easing);
+	}
+
+	:target {
+		scroll-margin-block: 5ex;
+	}
+
+	/* One visible, consistent keyboard focus ring everywhere. */
+	:focus-visible {
+		outline: 3px solid var(--color-link);
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto !important;
+		}
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+		::view-transition-group(*),
+		::view-transition-old(*),
+		::view-transition-new(*) {
+			animation: none !important;
+		}
+	}
+
+	@view-transition {
+		navigation: auto;
+	}
+
+	/* Astro image responsive styles, modified from -> https://docs.astro.build/en/guides/images/#responsive-image-styles */
+	:where([data-astro-image]) {
+		object-fit: var(--fit);
+		object-position: var(--pos);
+	}
+	[data-astro-image="full-width"] {
+		width: 100%;
+	}
+	[data-astro-image="constrained"] {
+		max-width: 100%;
+	}
+}
+
+@layer components {
+	@import "./components/admonition.css";
+	@import "./components/github-card.css";
+
+	.cactus-link {
+		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
+	}
+
+	.title {
+		@apply text-accent-2 text-2xl font-semibold;
+	}
+
+	/* Single source of truth for heading font: every real heading element
+	   picks this up, including ones inside .prose content (e.g. "Copyright"
+	   in about.astro) that never get the .title class. This deliberately
+	   is NOT wrapped in :where(...) — Typography plugin wraps its own
+	   heading rules in :where(...), which is zero-specificity by design,
+	   specifically so a plain element selector like this one overrides it. */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-shrikhand);
+	}
+
+	li {
+		background: #f5e9e9;
+		/* Matches PostCard's own rounded-md (0.375rem) so this square-cornered
+		   background doesn't peek out past the card's rounded corners. */
+		border-radius: 0.375rem;
+	}
+
+	/* Alternating section background with a wavy bottom edge, à la
+	   worldwidesidewalkjoy.com/the-map. The curve is a fixed-height strip masked
+	   with an SVG wave so its depth stays constant regardless of how tall the
+	   section's content is; the rectangle above it is a plain solid fill.
+	   The band itself breaks out to the full viewport width (the classic
+	   100vw/negative-margin trick) — .section-band-inner puts the heading and
+	   list back into the page's normal max-w-6xl column on top of it. */
+	.section-band {
+		position: relative;
+		z-index: 0;
+		width: 100vw;
+		margin-inline: calc(50% - 50vw);
+		padding-top: 2rem;
+		padding-bottom: 3.5rem;
+	}
+
+	.section-band-inner {
+		@apply mx-auto max-w-6xl px-4 sm:px-8;
+	}
+
+	.section-band::before,
+	.section-band::after {
+		content: "";
+		position: absolute;
+		inset-inline: 0;
+		z-index: -1;
+		background-color: var(--color-section-band);
+	}
+
+	.section-band::before {
+		top: 0;
+		bottom: 2.5rem;
+	}
+
+	.section-band::after {
+		bottom: 0;
+		height: 2.5rem;
+		mask-size: 100% 100%;
+		mask-repeat: no-repeat;
+		-webkit-mask-size: 100% 100%;
+		-webkit-mask-repeat: no-repeat;
+	}
+
+	/* Three wave shapes to alternate across bands, so they don't all look
+	   identical: the deep point of the curve sits center, left-of-center, or
+	   right-of-center. Each is the same "solid down to a curve" mask as
+	   before, just with the curve's control point (and end heights) shifted —
+	   .section-band defaults to the centered one when no modifier is given. */
+	.section-band::after,
+	.section-band.wave-center::after {
+		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0,0 L1440,0 L1440,20 Q720,140 0,20 Z'/%3E%3C/svg%3E");
+		-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0,0 L1440,0 L1440,20 Q720,140 0,20 Z'/%3E%3C/svg%3E");
+	}
+}
+
+/* Paints a background across the full viewport width while the element's
+   content stays in the page column. A filled border-image with a 100vw
+   horizontal outset draws outside the box without affecting layout or
+   scrollable overflow, so no wrapper or negative margins are needed. */
+@utility full-bleed-bg {
+	border-image: linear-gradient(var(--color-chrome-band) 0 0) fill 0 / / 0 100vw;
+}
+
+@utility prose {
+	--tw-prose-body: var(--color-global-text);
+	--tw-prose-bold: var(--color-global-text);
+	--tw-prose-bullets: var(--color-global-text);
+	--tw-prose-code: var(--color-global-text);
+	--tw-prose-headings: var(--color-accent-2);
+	--tw-prose-hr: 0.5px dashed #666;
+	--tw-prose-links: var(--color-global-text);
+	--tw-prose-quotes: var(--color-quote);
+	--tw-prose-th-borders: #666;
+	font-family: var(--font-reading);
+
+	/* Stat boxes, map figures, route nav etc. keep the site's monospace. */
+	& :where(.not-prose) {
+		font-family: var(--font-mono);
+		font-size: var(--text-sm);
+		line-height: var(--text-sm--line-height);
+	}
+}

@@ -1,0 +1,50 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description:
+		"About this fan transcription of Running Around Portland (1979) — the book, this project, and its copyright status.",
+	title: "About",
+};
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-12">About</h1>
+	<div class="prose lg:prose-lg prose-cactus">
+		<p>
+			<em>Running Around Portland</em> is a long out-of-print 1979 guidebook by John Perry and Buzz
+			Willits, with photography by Ancil Nance, published by Running Around Portland Press. It describes 44 running
+			routes around Portland, Vancouver, and the surrounding hills — grouped into five sections,
+			each with a hand-drawn course map, a difficulty and conditions rating, a beginning point,
+			and a turn-by-turn narrative in the authors' own voice.
+		</p>
+		<p>
+			This site is a fan-made, non-commercial transcription of that book. Each route gets its own
+			page with the original map, any accompanying photo, and the route's text copied out
+			verbatim (typos and all) from the scanned original. The <a class="cactus-link" href="/">home page</a> lists all of them grouped by section, with distance and difficulty at a glance and a map
+			showing roughly where each one starts.
+		</p>
+		<p>Also transcribed from the book's back matter:</p>
+		<ul class="list-inside list-disc" role="list">
+			<li><a class="cactus-link" href="/appendix/running-organizations/">Running organizations and publications</a> active in 1979</li>
+			<li><a class="cactus-link" href="/appendix/annual-runs-calendar/">A calendar of annual organized runs</a> around Portland and Vancouver</li>
+			<li><a class="cactus-link" href="/appendix/calorie-table/">A calorie table</a> and <a class="cactus-link" href="/appendix/aerobic-point-tables/">aerobic point tables</a> for walking and running</li>
+		</ul>
+		<p>
+			A couple of things are still incomplete: two routes (Ester Short Park Run and Lacamas Lake
+			Loop) came out too blurred in the original scans to transcribe, and a few months are missing
+			from the annual-runs calendar for the same reason. Both are noted where they're missing,
+			pending better scans of the original book.
+		</p>
+		<h2>Copyright</h2>
+		<p>
+			Text and maps &copy; 1979 the original authors and Running Around Portland Press. All rights remain with them;
+			nothing here is claimed as original work, and nothing on this site is for sale. It exists
+			because the book is long out of print and hard to find, and because these are still good
+			routes.
+		</p>
+		<p>
+			The source and transcription scripts are on <a class="cactus-link" href="https://github.com/lbeckman314/running-around-portland" rel="noreferrer" target="_blank">GitHub</a>.
+		</p>
+	</div>
+</PageLayout>

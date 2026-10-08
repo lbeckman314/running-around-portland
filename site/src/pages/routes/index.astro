@@ -1,0 +1,67 @@
+---
+import { getAllPosts } from "@/data/post";
+import PageLayout from "@/layouts/Base.astro";
+
+const allPosts = await getAllPosts();
+const routes = allPosts
+	.filter((post) => post.data.routeNumber !== undefined)
+	.sort((a, b) => (a.data.routeNumber ?? 0) - (b.data.routeNumber ?? 0));
+
+// Sections come out in book order since route numbers are assigned that way.
+const sections = new Map<string, typeof routes>();
+for (const route of routes) {
+	const section = route.data.section ?? "Other";
+	sections.set(section, [...(sections.get(section) ?? []), route]);
+}
+
+const meta = {
+	description:
+		"The 44 running routes from Running Around Portland (1979), in book order by section.",
+	title: "Routes",
+};
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-2">Routes</h1>
+	<p class="text-muted mb-4">
+		{routes.length} of the book's 44 routes from <em>Running Around Portland</em> (1979), grouped
+		by section as in the original book. See also the{" "}
+		<a class="cactus-link" href="/posts/running-around-portland/wildwood-trail-fold-out-map/">
+			Wildwood Trail fold-out map
+		</a>{" "}
+		and the <a class="cactus-link" href="/appendix/">appendices</a>.
+	</p>
+	{
+		routes.length < 44 && (
+			<p class="mb-12 rounded-md border border-dashed border-muted/40 bg-quote/5 p-3 text-sm text-muted">
+				Routes 41 (Ester Short Park Run) and 44 (Lacamas Lake Loop) are missing — their scanned
+				pages came out too blurred to transcribe, pending a rescan of the original book.
+			</p>
+		)
+	}
+	{
+		[...sections].map(([section, sectionRoutes], index) => (
+			<section class:list={["mb-12", index % 2 === 0 && "section-band"]}>
+				<div class:list={[index % 2 === 0 && "section-band-inner"]}>
+					<h2 id={`section-${section.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} class="title mb-4 text-lg">
+						{section}
+					</h2>
+					<ul class="space-y-3">
+						{sectionRoutes.map((route) => (
+							<li class="grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-3">
+								<span class="text-muted text-right font-semibold">{route.data.routeNumber}.</span>
+								<a class="cactus-link" href={`/posts/${route.id}/`}>
+									{route.data.title.replace(/^\d+\.\s*/, "")}
+								</a>
+								<span class="text-muted text-xs whitespace-nowrap">
+									{route.data.distanceMiles !== undefined && `${route.data.distanceMiles} mi`}
+									{route.data.difficulty !== undefined && ` · difficulty ${route.data.difficulty}/10`}
+								</span>
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+		))
+	}
+</PageLayout>

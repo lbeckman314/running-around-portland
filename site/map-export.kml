@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Running Around Portland Routes</name>
+    <Placemark>
+      <name>1. Grant Park / Mt. Tabor Loop</name>
+      <description>10.8 mi · difficulty 8/10 · Start: U.S. Grant Park · North Portland &amp; Near East Side · https://runningaroundportland.com/posts/01-grant-park-mt-tabor-loop/</description>
+      <Point>
+        <coordinates>-122.6323,45.5445,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>2. Rocky Butte Loop</name>
+      <description>3.2 mi · difficulty 7/10 · Start: Parking lot at the top of the Butte · North Portland &amp; Near East Side · https://runningaroundportland.com/posts/02-rocky-butte-loop/</description>
+      <Point>
+        <coordinates>-122.585,45.548,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>3. Oaks Park Loop</name>
+      <description>2.4 mi · difficulty 2/10 · Start: North end, Sellwood Park — S.E. 7th &amp; Malden · North Portland &amp; Near East Side · https://runningaroundportland.com/posts/03-oaks-park-loop/</description>
+      <Point>
+        <coordinates>-122.658,45.464,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>4. Reed College / Eastmoreland Loop</name>
+      <description>4.5 mi · difficulty 2/10 · Start: Crystal Springs Rhododendron Test Gardens parking lot on S.E. 28th, at the west end of the Reed College campus · North Portland &amp; Near East Side · https://runningaroundportland.com/posts/04-reed-college-eastmoreland-loop/</description>
+      <Point>
+        <coordinates>-122.628,45.482,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>5. University of Portland / Pier Park Loop</name>
+      <description>7.4 mi · difficulty 5/10 · Start: University of Portland main gate on Willamette Blvd. · North Portland &amp; Near East Side · https://runningaroundportland.com/posts/05-university-of-portland-pier-park-loop/</description>
+      <Point>
+        <coordinates>-122.729,45.567,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>6. Delta Park Dash</name>
+      <description>4.9 mi · difficulty 3/10 · Start: Field house in East Park · North Portland &amp; Near East Side · https://runningaroundportland.com/posts/06-delta-park-dash/</description>
+      <Point>
+        <coordinates>-122.692,45.586,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>7. Laurelhurst Park</name>
+      <description>0.82 mi · difficulty 1/10 · Start: By the restrooms on S.E. Ankeny, Laurelhurst Park · North Portland &amp; Near East Side · https://runningaroundportland.com/posts/07-laurelhurst-park/</description>
+      <Point>
+        <coordinates>-122.623,45.524,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>8. Troutdale Trot</name>
+      <description>6.8 mi · difficulty 7/10 · Start: Troutdale City Park on the Sandy River · Suburban East Side · https://runningaroundportland.com/posts/08-troutdale-trot/</description>
+      <Point>
+        <coordinates>-122.396,45.539,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>9. Mt. Hood Community College Loop</name>
+      <description>6.2 mi · difficulty 6/10 · Start: Mt. Hood Community College entrance on N.E. 17th Dr., Gresham, Ore. · Suburban East Side · https://runningaroundportland.com/posts/09-mount-hood-community-college-loop/</description>
+      <Point>
+        <coordinates>-122.39,45.521,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>10. Corbett High Loop</name>
+      <description>5.8 mi · difficulty 6/10 · Start: Corbett High School · Suburban East Side · https://runningaroundportland.com/posts/10-corbett-high-loop/</description>
+      <Point>
+        <coordinates>-122.296,45.545,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>11. Glendoveer</name>
+      <description>1.8 mi · difficulty 1/10 · Start: Beginning of path on Glisan by parking lot · Suburban East Side · https://runningaroundportland.com/posts/11-glendoveer/</description>
+      <Point>
+        <coordinates>-122.498,45.525,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>12. New Era Loop</name>
+      <description>5.3 mi · difficulty 3/10 · Start: Warner Grange Hall, New Era, Ore. · Suburban East Side · https://runningaroundportland.com/posts/12-new-era-loop/</description>
+      <Point>
+        <coordinates>-122.576,45.301,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>13. Tryon Creek Rim Trail / Center Loop</name>
+      <description>Start: Nature House at park entrance · Near West Side · https://runningaroundportland.com/posts/13-tryon-creek-rim-trail-center-loop/</description>
+      <Point>
+        <coordinates>-122.679,45.438,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>14. Tryon Creek Horse Loop</name>
+      <description>3 mi · difficulty 3/10 · Start: Equestrian Area west of parking lot · Near West Side · https://runningaroundportland.com/posts/14-tryon-creek-horse-loop/</description>
+      <Point>
+        <coordinates>-122.679,45.438,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>15. Sauvie Island Loop</name>
+      <description>12.5 mi · difficulty 8/10 · Start: Parking lot to left of bridge · Near West Side · https://runningaroundportland.com/posts/15-sauvie-island-loop/</description>
+      <Point>
+        <coordinates>-122.798,45.606,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>16. Hewitt / Humphrey / Fairmont Loop</name>
+      <description>difficulty 3/10 · Start: Across from Shell Station on S.W. Patton and Dosch Rds. · Near West Side · https://runningaroundportland.com/posts/16-hewitt-humphrey-fairmont-loop/</description>
+      <Point>
+        <coordinates>-122.713,45.5,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>17. Lewis &amp; Clark Campus Loop</name>
+      <description>1.8 mi · difficulty 2/10 · Start: Top of stairs at west entrance of Pamplin Sports Center · Near West Side · https://runningaroundportland.com/posts/17-lewis-and-clark-campus-loop/</description>
+      <Point>
+        <coordinates>-122.668,45.437,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>18. Lewis and Clark / Dunthorpe Loops</name>
+      <description>Start: Main entrance (Albany Gate) to campus on Palatine Rd. · Near West Side · https://runningaroundportland.com/posts/18-lewis-and-clark-dunthorpe-loops/</description>
+      <Point>
+        <coordinates>-122.668,45.437,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>19. Washington Park Loop</name>
+      <description>3.6 mi · difficulty 4/10 · Start: Parking lots by tennis courts and Japanese Garden on Kingston Drive in Washington Park · Near West Side · https://runningaroundportland.com/posts/19-washington-park-loop/</description>
+      <Point>
+        <coordinates>-122.707,45.519,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>20. Downtown River Run</name>
+      <description>2.9 mi · difficulty 3/10 · Start: Anywhere along the westside downtown waterfront · Near West Side · https://runningaroundportland.com/posts/20-downtown-river-run/</description>
+      <Point>
+        <coordinates>-122.67,45.516,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>21. Forestry Center / Hoyt Arboretum Loop</name>
+      <description>3.8 mi · difficulty 5/10 · Start: North side of the Western Forestry Center building by the Zoo · Near West Side · https://runningaroundportland.com/posts/21-forestry-center-hoyt-arboretum-loop/</description>
+      <Point>
+        <coordinates>-122.716,45.509,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>22. Macleay Park Loop</name>
+      <description>3.7 mi · difficulty 5/10 · Start: Macleay Park parking lot · Near West Side · https://runningaroundportland.com/posts/22-macleay-park-loop/</description>
+      <Point>
+        <coordinates>-122.709,45.534,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>23. Balch Creek / N.W. Thurman Loop</name>
+      <description>3 mi · difficulty 4/10 · Start: Thurman Park underneath Thurman St. Bridge · Near West Side · https://runningaroundportland.com/posts/23-balch-creek-nw-thurman-loop/</description>
+      <Point>
+        <coordinates>-122.713,45.539,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>24. Leif Erikson / Wildwood Loop</name>
+      <description>9 mi · difficulty 7/10 · Start: Trail Head on N.W. 53rd Drive · Near West Side · https://runningaroundportland.com/posts/24-leif-erikson-wildwood-loop/</description>
+      <Point>
+        <coordinates>-122.728,45.544,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>25. Duniway Park / Terwilliger Runs</name>
+      <description>5.5 mi · difficulty 3/10 · Start: Duniway Park track on SW Barbur in Portland · Near West Side · https://runningaroundportland.com/posts/25-duniway-park-terwilliger-runs/</description>
+      <Point>
+        <coordinates>-122.687,45.503,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>26. Terwilliger / Himes Park</name>
+      <description>5.6 mi · difficulty 5/10 · Start: South end of Duniway Park track · Near West Side · https://runningaroundportland.com/posts/26-terwilliger-himes-park/</description>
+      <Point>
+        <coordinates>-122.687,45.503,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>27. PCC / Mt. Sylvania Loops</name>
+      <description>Start: Main entrance to campus at stoplight on S.W. 49th Ave. · Near West Side · https://runningaroundportland.com/posts/27-portland-community-college-mt-sylvania-loops/</description>
+      <Point>
+        <coordinates>-122.718,45.456,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>28. Hagg Lake Loop</name>
+      <description>10.4 mi · difficulty 10/10 · Start: Parking lot at south end of dam face · Suburban West Side · https://runningaroundportland.com/posts/28-hagg-lake-loop/</description>
+      <Point>
+        <coordinates>-123.208,45.46,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>29. Lake Oswego Loop</name>
+      <description>7.5 mi · difficulty 6/10 · Start: Lake Oswego Swim Park · Suburban West Side · https://runningaroundportland.com/posts/29-lake-oswego-loop/</description>
+      <Point>
+        <coordinates>-122.67,45.421,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>30. Olympic Fund Run</name>
+      <description>6.2 mi · difficulty 4/10 · Start: Lake Oswego Junior High School · Suburban West Side · https://runningaroundportland.com/posts/30-olympic-fund-run/</description>
+      <Point>
+        <coordinates>-122.67,45.421,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>31. Old River Road Run</name>
+      <description>7 mi · difficulty 5/10 · Start: George Rogers Park in Lake Oswego · Suburban West Side · https://runningaroundportland.com/posts/31-old-river-road-run/</description>
+      <Point>
+        <coordinates>-122.664,45.413,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>32. Killer Kowalski Butte</name>
+      <description>10.4 mi · difficulty 10/10 · Start: Parking lot by Chapel, Marylhurst Education Center · Suburban West Side · https://runningaroundportland.com/posts/32-killer-kowalski-butte/</description>
+      <Point>
+        <coordinates>-122.664,45.388,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>33. Lawrence Loop</name>
+      <description>3.6 mi · difficulty 3/10 · Start: Intersection of S. Rosemont and Wisteria Roads west of West Linn · Suburban West Side · https://runningaroundportland.com/posts/33-lawrence-loop/</description>
+      <Point>
+        <coordinates>-122.651,45.373,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>34. Helvetia / West Union Loop</name>
+      <description>11.2 mi · difficulty 9/10 · Start: West Union School · Suburban West Side · https://runningaroundportland.com/posts/34-helvetia-west-union-loop/</description>
+      <Point>
+        <coordinates>-122.93,45.585,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>35. Commonwealth Lake Loop</name>
+      <description>0.7 mi · difficulty 1/10 · Start: Foothills Park · Suburban West Side · https://runningaroundportland.com/posts/35-commonwealth-lake-loop/</description>
+      <Point>
+        <coordinates>-122.818,45.525,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>36. Greenway Park Loop</name>
+      <description>2.6 mi · difficulty 2/10 · Start: Parking place on S.W. Hall Street · Suburban West Side · https://runningaroundportland.com/posts/36-greenway-park-loop/</description>
+      <Point>
+        <coordinates>-122.795,45.475,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>37. Town Center Tear</name>
+      <description>6 mi · difficulty 4/10 · Start: West parking lot, Town Center · Suburban West Side · https://runningaroundportland.com/posts/37-town-center-tear/</description>
+      <Point>
+        <coordinates>-122.872,45.515,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>38. Oak Hills Loop</name>
+      <description>7 mi · difficulty 6/10 · Start: Oak Hills School, off Sunset Highway · Suburban West Side · https://runningaroundportland.com/posts/38-oak-hills-loop/</description>
+      <Point>
+        <coordinates>-122.857,45.529,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>39. Vancouver Lake Run</name>
+      <description>3.4 mi · difficulty 2/10 · Start: Vancouver Lake Park · Clark County · https://runningaroundportland.com/posts/39-vancouver-lake-run/</description>
+      <Point>
+        <coordinates>-122.716,45.666,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>40. Evergreen Highway Run</name>
+      <description>11.8 mi · difficulty 9/10 · Start: Wintler Bicentennial Park, on Hwy. 14 to Camas · Clark County · https://runningaroundportland.com/posts/40-evergreen-highway-run/</description>
+      <Point>
+        <coordinates>-122.628,45.612,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>42. Salmon Creek Loops</name>
+      <description>Start: Columbia River High School, Vancouver, Wash. · Clark County · https://runningaroundportland.com/posts/42-salmon-creek-loops/</description>
+      <Point>
+        <coordinates>-122.639,45.698,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>43. Vancouver Barracks Loop</name>
+      <description>1.7 mi · difficulty 1/10 · Start: Parking lot at corner of McClellan and McLoughlin in the Vancouver Barracks · Clark County · https://runningaroundportland.com/posts/43-vancouver-barracks-loop/</description>
+      <Point>
+        <coordinates>-122.66,45.623,0</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
+

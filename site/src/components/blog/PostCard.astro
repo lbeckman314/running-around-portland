@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import { postHref } from "@/data/post";
+
+type Props = {
+	post: CollectionEntry<"post">;
+	withDesc?: boolean;
+};
+
+const { post, withDesc = false } = Astro.props;
+const { data } = post;
+const title = data.routeNumber !== undefined ? data.title.replace(/^\d+\.\s*/, "") : data.title;
+const meta = [
+	data.distanceMiles !== undefined ? `${data.distanceMiles} mi` : undefined,
+	data.difficulty !== undefined ? `difficulty ${data.difficulty}/10` : undefined,
+]
+	.filter((part) => part !== undefined)
+	.join(" · ");
+---
+
+<a
+	class="post-card group border-muted/30 hover:border-link bg-global-text/3 flex h-full flex-col rounded-md border p-4 no-underline transition-colors"
+	href={postHref(post)}
+	data-post-id={post.id}
+>
+	{
+		data.draft && <span class="text-red-500 text-xs font-semibold">(Draft)</span>
+	}
+	{
+		data.publishDate && (
+			<FormattedDate class="text-muted mb-1 text-xs font-semibold" date={data.publishDate} />
+		)
+	}
+	<span class="flex items-start justify-between gap-2">
+		<span class="group-hover:decoration-link font-semibold underline-offset-2 group-hover:underline group-hover:decoration-2">
+			{title}
+		</span>
+		{
+			data.routeNumber !== undefined && (
+				<span class="text-muted flex-none pt-0.5 text-xs font-semibold whitespace-nowrap" aria-hidden="true">
+					No. {data.routeNumber}
+				</span>
+			)
+		}
+	</span>
+	{withDesc && data.description && <q class="text-muted mt-2 line-clamp-3 text-xs italic">{data.description}</q>}
+	{meta && <span class="text-muted mt-auto pt-3 text-xs whitespace-nowrap">{meta}</span>}
+</a>
+
+<style>
+	/* Toggled from RoutesMap.astro when the matching map marker is hovered. */
+	a.post-card.is-map-active {
+		border-color: var(--color-link);
+	}
+</style>

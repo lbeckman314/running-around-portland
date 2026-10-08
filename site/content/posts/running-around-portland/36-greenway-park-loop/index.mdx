@@ -1,0 +1,54 @@
+---
+title: "36. Greenway Park Loop"
+description: "Route 36 from Running Around Portland (1979): a 2.6-mile noon-hour loop through Greenway Park's marshy Fanno Creek trails."
+routeNumber: 36
+section: "Suburban West Side"
+distanceMiles: 2.6
+distanceKm: 4.2
+difficulty: 2
+beginningPoint: "Parking place on S.W. Hall Street"
+lat: 45.475
+lng: -122.795
+runningSurface: "Asphalt trail"
+routeConditions:
+  aesthetics: 5
+  badWeatherRunning: 8
+  autoTraffic: 10
+routeMap:
+  src: "./map.jpg"
+  alt: "Hand-drawn course map for the Greenway Park Loop"
+  caption: "Course map from the original book."
+---
+
+import RouteStats from "@/components/blog/RouteStats.astro";
+
+<RouteStats
+	routeNumber={frontmatter.routeNumber}
+	section={frontmatter.section}
+	distanceMiles={frontmatter.distanceMiles}
+	distanceKm={frontmatter.distanceKm}
+	difficulty={frontmatter.difficulty}
+	beginningPoint={frontmatter.beginningPoint}
+	runningSurface={frontmatter.runningSurface}
+	suggestedBy={frontmatter.suggestedBy}
+	conditions={frontmatter.routeConditions}
+/>
+
+<blockquote>
+
+Greenway Park, operated by the Tualatin Hills Parks and Recreation District, is a favorite noon-hour jogging area for many employees of the industrial park located right down the road. Take Highway 217 heading south to the Progress exit. Turn right, or west on Hall Street and park where the road widens by the Greenway Park sign on your left.
+
+There are arrows painted on the paths, but to avoid getting confused, ignore them and follow our map to get the full 2.6 miles. Take the dog leg to the right and circle the tennis courts before coming back the same way. The trail goes through a marsh area that can be inundated with as much as 8 inches of water during rainy months, but you can pick your way around it.
+
+Future plans call for extension of this fine park and trail system north and south along Fanno Creek. There are no water fountains or restrooms as yet.
+
+</blockquote>
+
+![Hand-drawn course map for the Greenway Park Loop](./map.jpg)
+
+_Course map from the original book._
+
+![Runners in motion on a sunlit forest trail](./photo.jpg)
+
+_Photograph by Ancil Nance, from the original book._
+

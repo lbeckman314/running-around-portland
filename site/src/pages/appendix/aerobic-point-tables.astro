@@ -1,0 +1,36 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description:
+		"Aerobic point values for walking and running distances of one to fifteen miles, from Running Around Portland (1979).",
+	title: "Aerobic Point Tables",
+};
+---
+
+<PageLayout meta={meta} wide>
+	<h1 class="title mb-2">Aerobic Point Tables</h1>
+	<p class="text-muted mb-8 text-sm">Appendix from <em>Running Around Portland</em> (1979).</p>
+	<div class="prose lg:prose-lg prose-cactus">
+		<p>
+			The following tables give aerobic point values for walking and running distances from one
+			to ten miles at 1/2 mile increments, with the exception of the 12.5 mile distance. From ten
+			to fifteen miles the increments are given at the mile mark, with the exception of the 12.5
+			mile distance. For more detailed increments to 1/10 mile, see the appendix to "The New
+			Aerobics," by Dr. Ken Cooper. Data used in the tables were obtained directly from the
+			Institute for Aerobics Research and are somewhat revised from the tables in the book. Point
+			scores are in the third column.
+		</p>
+	</div>
+	<figure class="not-prose mt-6">
+		<img
+			src="/appendix/aerobic-point-tables.jpg"
+			alt="Aerobic point tables for running and walking distances from 1 to 15 miles, giving a point score by finishing time"
+			class="w-full rounded-sm border border-muted/30 bg-white"
+		/>
+		<figcaption class="text-muted mt-2 text-sm">Scanned from the original book.</figcaption>
+	</figure>
+	<p class="mt-12">
+		<a class="cactus-link" href="/appendix/">← Back to appendices</a>
+	</p>
+</PageLayout>

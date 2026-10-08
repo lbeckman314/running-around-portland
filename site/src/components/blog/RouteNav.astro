@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { postHref } from "@/data/post";
+
+interface Props {
+	prev?: CollectionEntry<"post"> | undefined;
+	next?: CollectionEntry<"post"> | undefined;
+}
+
+const { prev, next } = Astro.props;
+---
+
+{
+	(prev || next) && (
+		<nav
+			aria-label="Route navigation"
+			class="not-prose border-muted/30 mt-12 grid gap-4 border-t pt-6 sm:grid-cols-2"
+		>
+			{prev ? (
+				<a class="group flex flex-col gap-1" href={postHref(prev)} rel="prev">
+					<span class="text-muted text-xs">&larr; Previous route</span>
+					<span class="text-accent font-semibold group-hover:underline">{prev.data.title}</span>
+				</a>
+			) : (
+				<span />
+			)}
+			{next && (
+				<a class="group flex flex-col gap-1 sm:text-end" href={postHref(next)} rel="next">
+					<span class="text-muted text-xs">Next route &rarr;</span>
+					<span class="text-accent font-semibold group-hover:underline">{next.data.title}</span>
+				</a>
+			)}
+		</nav>
+	)
+}

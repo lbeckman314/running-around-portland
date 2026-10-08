@@ -1,0 +1,73 @@
+---
+import type { CollectionEntry } from "astro:content";
+import RouteAppIcon from "@/components/blog/RouteAppIcon.astro";
+import RoutesMap from "@/components/RoutesMap.astro";
+import { getAllPosts, groupPosts } from "@/data/post";
+import PageLayout from "@/layouts/Base.astro";
+import { collectionDateSort } from "@/utils/date";
+
+const allPosts = await getAllPosts();
+const allPostsByDate = allPosts.sort(collectionDateSort) as CollectionEntry<"post">[];
+
+// Grouped by book section (in book order — see groupPosts) rather than a flat list.
+const groupedPosts = groupPosts(allPostsByDate);
+// "Other" (posts with no book section, e.g. the Wildwood Trail fold-out map)
+// otherwise lands wherever its earliest post falls in date-sorted order —
+// pin it last instead. Array#sort is stable, so every other key keeps its
+// original relative order.
+const groupKeys = Object.keys(groupedPosts).sort((a, b) =>
+	a === "Other" ? 1 : b === "Other" ? -1 : 0,
+);
+// "Other" (posts with no book section) never gets the band — only the book's
+// geographic sections alternate, so the banding stays the same as on /routes/
+// regardless of where "Other" happens to land in date-sorted order.
+const geoSectionKeys = groupKeys.filter((key) => key !== "Other");
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+const mapRoutes = allPosts
+	.filter((p) => p.data.routeNumber !== undefined && p.data.lat !== undefined && p.data.lng !== undefined)
+	.sort((a, b) => (a.data.routeNumber ?? 0) - (b.data.routeNumber ?? 0))
+	.map((p) => ({
+		id: p.id,
+		title: p.data.title,
+		lat: p.data.lat as number,
+		lng: p.data.lng as number,
+		distanceMiles: p.data.distanceMiles,
+		difficulty: p.data.difficulty,
+	}));
+---
+
+<PageLayout meta={{ title: "Home" }}>
+	<section>
+		<p class="mb-8">
+			A route-by-route transcription of <em>Running Around Portland</em> (1979) by John Perry and
+			Buzz Willits — 44 running routes around Portland, Vancouver, and the surrounding hills, with
+			the original hand-drawn maps, photos, and turn-by-turn directions.
+		</p>
+		<RoutesMap routes={mapRoutes} />
+	</section>
+	<section class="mt-16">
+		{
+			groupKeys.map((groupKey) => {
+				const geoIndex = geoSectionKeys.indexOf(groupKey);
+				const banded = geoIndex !== -1 && geoIndex % 2 === 0;
+				return (
+					<section class:list={["mb-16", banded && ["section-band", "wave-center"]]}>
+						<div class:list={[banded && "section-band-inner"]}>
+							<h2 id={`group-${slugify(groupKey)}`} class="title text-accent text-xlg">
+								{groupKey}
+							</h2>
+							<ul class="mt-5 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+								{groupedPosts[groupKey]?.map((p) => (
+									<li class="bg-transparent!">
+										<RouteAppIcon post={p} />
+									</li>
+								))}
+							</ul>
+						</div>
+					</section>
+				);
+			})
+		}
+	</section>
+</PageLayout>

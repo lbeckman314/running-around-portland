@@ -1,0 +1,63 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import { githubEditUrl } from "@/utils/github";
+
+interface Props {
+	content: CollectionEntry<"post">;
+}
+
+const { content } = Astro.props;
+const { data } = content;
+---
+
+{
+	data.coverImage && (
+		<div class="mb-6 aspect-video">
+			<Image
+				alt={data.coverImage.alt}
+				layout="constrained"
+				width={748}
+				height={420}
+				priority
+				src={data.coverImage.src}
+			/>
+		</div>
+	)
+}
+{data.draft ? <span class="text-base text-red-500">(Draft)</span> : null}
+<h1 class="title">
+	{data.title}
+</h1>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+	{
+		data.publishDate && (
+			<p class="font-semibold">
+				<FormattedDate date={data.publishDate} />
+			</p>
+		)
+	}
+	{
+		data.updatedDate && (
+			<span class="bg-quote/5 text-quote rounded-lg px-2 py-1">
+				Updated:
+				<FormattedDate class="ms-1" date={data.updatedDate} />
+			</span>
+		)
+	}
+	{
+		content.filePath && (
+			<a
+				class="cactus-link text-muted inline-flex items-center gap-1"
+				href={githubEditUrl(content.filePath)}
+				rel="noopener"
+				target="_blank"
+			>
+				<Icon aria-hidden="true" class="h-4 w-4" focusable="false" name="mdi:github" />
+				Edit on GitHub
+			</a>
+		)
+	}
+</div>

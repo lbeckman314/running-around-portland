@@ -1,0 +1,417 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description:
+		"A calendar of annual organized runs around Portland and Vancouver, from Running Around Portland (1979).",
+	title: "Calendar of Annual Runs",
+};
+
+interface Race {
+	date: string;
+	race: string;
+	distance: string;
+	start: string;
+}
+
+const months: [string, Race[]][] = [
+	[
+		"January",
+		[
+			{
+				date: "New Year's Day",
+				race: "ORRC Hangover Handicap",
+				distance: "10 mi.",
+				start: "Delta Park (East), North Portland",
+			},
+			{
+				date: "First or Second Saturday",
+				race: "CCTC Lower River Road Run",
+				distance: "4.5 mi., 2.0 mi.",
+				start: "Vancouver, Wash., one mile beyond Alcoa plant",
+			},
+			{
+				date: "Second Saturday",
+				race: "Governor's Trophy Run",
+				distance: "½ marathon (13.1 mi.), 10 km (6.2 mi.), 2.0 mi.",
+				start: "Capitol Building, Salem, Ore.",
+			},
+			{
+				date: "Third Saturday",
+				race: "ORRC Terwilliger Run",
+				distance: "10 km (6.2 mi.), 2.0 mi.",
+				start: "Duniway Park, S.W. Portland",
+			},
+			{
+				date: "Third Saturday",
+				race: "Columbia River High School Run",
+				distance: "9.8 mi., 4.0 mi., 2.0 mi.",
+				start: "Columbia High School, Vancouver, Wash.",
+			},
+		],
+	],
+	[
+		"February",
+		[
+			{
+				date: "First Saturday",
+				race: "Ore. AAU 30 km. championship",
+				distance: "30 km (18.6 mi.)",
+				start: "Delta Park (East), North Portland",
+			},
+			{
+				date: "Two Saturdays before Trails-end Marathon",
+				race: "Fred Meyer Runner-up 10,000 Run",
+				distance: "10,000 meters (10 km, 6.2 mi.)",
+				start: "S.W. corner of Mt. Hood Community College, Gresham, Ore.",
+			},
+			{
+				date: "Last Saturday",
+				race: "Trail's End Marathon",
+				distance: "26 mi., 385 yards",
+				start: "Seaside, Oregon",
+			},
+		],
+	],
+	[
+		"March",
+		[
+			{
+				date: "Vernal Equinox",
+				race: "Mud Grand Prix",
+				distance: "6.75 mi.",
+				start: "Wallace Park, N.W. Portland",
+			},
+			{
+				date: "Second Saturday",
+				race: "CCTC 6 Person 4 Hour Relay",
+				distance: "Alternate 880 laps",
+				start: "Battle Ground High School, Battle Ground, Wash.",
+			},
+			{
+				date: "Second Saturday",
+				race: "Blue Lake Run",
+				distance: "7.5 mi. (12 km.)",
+				start: "Blue Lake Park, east of Portland",
+			},
+			{
+				date: "Third Saturday",
+				race: "ORRC 15 Km. Run",
+				distance: "15 km (9.3 mi.), 2.0 mi.",
+				start: "Blue Lake Park, east of Portland",
+			},
+			{
+				date: "St. Patrick's Day",
+				race: "Shamrock 10,000",
+				distance: "10,000 meters (6.2 mi.)",
+				start: "O'Callahan's Restaurant, Beaverton, Oregon",
+			},
+			{
+				date: "Fourth Saturday",
+				race: 'The Columbian "Run Along The Columbia"',
+				distance: "10,000 meters (6.2 mi.), 2.0 mi.",
+				start: "6th & Grant St., Vancouver, Wash.",
+			},
+			{
+				date: "Easter Sunday",
+				race: "Easter Sunrise Run",
+				distance: "3.2 mi.",
+				start: "Memorial Coliseum, Portland",
+			},
+			{
+				date: "Last Sunday",
+				race: "Lacamas Lake Loop",
+				distance: "25 km (15 mi.), 10 km (6.2 mi.)",
+				start: "Evergreen High School, east of Vancouver, Wash.",
+			},
+			{
+				date: "Last Saturday (or first Saturday in April)",
+				race: "ORRC Oak Hills Shirt Run",
+				distance: "7.0 mi., 2.0 mi.",
+				start: "Oak Hills School, west of Portland",
+			},
+		],
+	],
+	[
+		"July",
+		[
+			{
+				date: "Last Saturday",
+				race: "CCTC Fort Vancouver Barracks Run",
+				distance: "3.8 mi.",
+				start: "Army Barracks, Vancouver, Wash.",
+			},
+			{
+				date: "Last Saturday",
+				race: "Washington Park Fun Run",
+				distance: "5.0 mi.",
+				start: "Forestry Center in Washington Park, S.W. Portland",
+			},
+			{
+				date: "Last Saturday",
+				race: "Vernonia Road Run",
+				distance: "15 km (9.3 mi.)",
+				start: "Vernonia High School, Vernonia, Ore.",
+			},
+		],
+	],
+	[
+		"August",
+		[
+			{
+				date: "First Saturday",
+				race: "ORRC 24-Hour Relay",
+				distance: "Alternating miles for 24 hrs.",
+				start: "Duniway Park, S.W. Portland",
+			},
+			{
+				date: "First Sunday",
+				race: "CCTC Burgerville To Burgerville",
+				distance: "2.25 mi.",
+				start: "Vancouver, Wash.",
+			},
+			{
+				date: "Second Saturday",
+				race: "Seaside Beach Run",
+				distance: "7¼ mi. approx., 2.0 mi., 1.0 mi., 880 yds.",
+				start: "Seaside, Ore.",
+			},
+		],
+	],
+	[
+		"September",
+		[
+			{
+				date: "Autumn Equinox",
+				race: "Mud Grand Prix",
+				distance: "6.75 mi.",
+				start: "Wallace Park, N.W. Portland",
+			},
+			{
+				date: "Labor Day (first Monday)",
+				race: "CCTC Labor Day Downhill Mile",
+				distance: "1.0 mi.",
+				start: "Fruit Valley Road, west of Vancouver, Wash.",
+			},
+			{
+				date: "Saturday after Labor Day",
+				race: "Vancouver Sausage Festival",
+				distance: "3.7 mi., 1.8 mi.",
+				start: "Vancouver, Wash.",
+			},
+			{
+				date: "Saturday after Labor Day",
+				race: "Gladstone Jaycee Road Run",
+				distance: "7.25 mi., 2.0 mi.",
+				start: "Gladstone High School, Gladstone, Ore.",
+			},
+			{
+				date: "Second Sunday",
+				race: "Run The Lake",
+				distance: "7.5 mi., 2.0 mi.",
+				start: "Lakeridge High School, Lake Oswego, Ore.",
+			},
+			{
+				date: "Second Sunday",
+				race: "Nike/Oregon Track Club Marathon",
+				distance: "26 mi., 385 yards",
+				start: "Hayward Field, Univ. of Oregon, Eugene, Ore.",
+			},
+			{
+				date: "Third Saturday after Labor Day",
+				race: "ORRC 2-Person 10 mi. Relay",
+				distance: "Alternating 440 yards",
+				start: "Duniway Park, S.W. Portland",
+			},
+			{
+				date: "Third Saturday",
+				race: "Swan Island Fun Run",
+				distance: "6.0 mi. approx.",
+				start: "Swan Island, North Portland",
+			},
+			{
+				date: "Second Saturday after Labor Day",
+				race: "ORRC Tryon Creek 10 Kilometer Run",
+				distance: "10 km (6.2 mi.)",
+				start: "Lewis & Clark College, S.W. Portland",
+			},
+			{
+				date: "Last Sunday",
+				race: "ORRC Hagg Lake Run",
+				distance: "10.4 mi., 2.0 mi.",
+				start: "Scoggins Dam Park, west of Forest Grove, Ore.",
+			},
+		],
+	],
+	[
+		"October",
+		[
+			{
+				date: "First Saturday",
+				race: "ORRC Oxbow Road Run",
+				distance: "5.1 mi., 2.0 mi.",
+				start: "Oxbow Park, east of Gresham, Ore.",
+			},
+			{
+				date: "First or Second Sunday",
+				race: "Paavo Nurmi Classic Cross Country Race",
+				distance: "10 km approx.",
+				start: "Mt. Hood Community College, Gresham, Ore.",
+			},
+			{
+				date: "Second Monday",
+				race: "Zoo Run",
+				distance: "8.0 mi.",
+				start: "Multnomah Athletic Club, S.W. Portland",
+			},
+			{
+				date: "Second Saturday",
+				race: "CCTC Esther Short Park Run",
+				distance: "5.9 mi., 2.0 mi.",
+				start: "Vancouver, Wash.",
+			},
+			{
+				date: "Second Saturday",
+				race: "YMCA Fun Run",
+				distance: "5.0 mi., 2.0 mi.",
+				start: "Duniway Park, S.W. Portland",
+			},
+			{
+				date: "Third Sunday",
+				race: "ORRC Mt. Sylvania 10,000 Meter Run",
+				distance: "10,000 meters (6.2 mi.)",
+				start: "Portland Community College, Mt. Sylvania, S.W. Portland",
+			},
+			{
+				date: "Last Sunday",
+				race: "ORRC & AAU 50 Miler",
+				distance: "50.0 mi.",
+				start: "Sauvie Island, north of Portland",
+			},
+			{
+				date: "Last Sunday",
+				race: "ORRC Gabriel Park Cross Country Run",
+				distance: "10 km, 6.2 mi.",
+				start: "Gabriel Park, S.W. Portland, Ore.",
+			},
+		],
+	],
+	[
+		"November",
+		[
+			{
+				date: "First Sunday",
+				race: "ORRC 10 Mile Track Run",
+				distance: "10.0 mi.",
+				start: "Duniway Park, S.W. Portland",
+			},
+			{
+				date: "Third Saturday",
+				race: "I Found It Run",
+				distance: "2.5 mi.",
+				start: "Duniway Park, S.W. Portland",
+			},
+			{
+				date: "Third Saturday",
+				race: "Kilometers For Kids Run",
+				distance: "10 km, 3 km",
+				start: "Blue Lake Park, east of Portland",
+			},
+			{
+				date: "Third Sunday",
+				race: "CCTC Turkey Trot",
+				distance: "3.8 mi., 1.2 mi.",
+				start: "Army Barracks area, Vancouver, Wash.",
+			},
+			{
+				date: "Third Sunday",
+				race: "Gobble Jog",
+				distance: "3.0 mi.+",
+				start: "Mt. Hood Community College, Gresham, Ore.",
+			},
+			{
+				date: "Last Saturday",
+				race: "Pilgrimage Marathon",
+				distance: "26 mi., 385 yards",
+				start: "Phoenix High School, Phoenix, (Southern) Ore.",
+			},
+			{
+				date: "Sunday, two weeks before Portland Marathon",
+				race: "CCTC One-half Marathon",
+				distance: "13.1 mi.",
+				start: "Columbia High School Academy, south of Battle Ground, Wash.",
+			},
+			{
+				date: "Last Sunday",
+				race: "ORRC Portland Marathon",
+				distance: "26 mi., 385 yards",
+				start: "Univ. of Portland, North Portland",
+			},
+		],
+	],
+	[
+		"December",
+		[
+			{
+				date: "Winter Solstice",
+				race: "Mud Grand Prix",
+				distance: "6.75 mi.",
+				start: "Wallace Park, N.W. Portland",
+			},
+			{
+				date: "First Saturday",
+				race: "Lake Oswego Run",
+				distance: "8 mi.",
+				start: "Lake Oswego High School, Lake Oswego, Ore.",
+			},
+			{
+				date: "First Sunday",
+				race: "CCTC Barracks To Wintler Park",
+				distance: "6 mi., 2 mi.",
+				start: "Army Barracks area, Vancouver, Wash.",
+			},
+			{
+				date: "Second Saturday",
+				race: "ORRC Oak Hills Run",
+				distance: "7 mi., 2 mi.",
+				start: "Oak Hills School, west of Portland",
+			},
+		],
+	],
+];
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-2">Calendar of Annual Runs</h1>
+	<p class="text-muted mb-4 text-sm">
+		Appendix from <em>Running Around Portland</em> (1979) — dates, distances and starting points
+		as printed; races listed here have long since changed or ended, kept for the historical
+		record rather than as a current schedule.
+	</p>
+	<p class="mb-12 rounded-md border border-dashed border-muted/40 bg-quote/5 p-3 text-sm text-muted">
+		The scanned pages for <strong>April, May, June, and early July</strong> came out blank — that
+		stretch of the calendar is missing here pending a rescan of the original book.
+	</p>
+	{
+		months.map(([month, races]) => (
+			<section class="mb-12">
+				<h2 class="title mb-4 text-lg">{month}</h2>
+				<ul class="space-y-4">
+					{races.map((r) => (
+						<li class="grid gap-1 sm:grid-cols-[10rem_1fr]">
+							<span class="text-muted text-sm">{r.date}</span>
+							<span>
+								<strong>{r.race}</strong> — {r.distance}
+								<br />
+								<span class="text-muted text-sm">{r.start}</span>
+							</span>
+						</li>
+					))}
+				</ul>
+			</section>
+		))
+	}
+	<p class="mt-4">
+		<a class="cactus-link" href="/appendix/">← Back to appendices</a>
+	</p>
+</PageLayout>

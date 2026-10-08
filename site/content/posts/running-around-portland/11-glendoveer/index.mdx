@@ -1,0 +1,53 @@
+---
+title: "11. Glendoveer"
+description: "Route 11 from Running Around Portland (1979): a soft 1.8-mile wood-chip loop built for runners on the Glendoveer Golf Course."
+routeNumber: 11
+section: "Suburban East Side"
+distanceMiles: 1.8
+distanceKm: 2.9
+difficulty: 1
+beginningPoint: "Beginning of path on Glisan by parking lot"
+lat: 45.525
+lng: -122.498
+runningSurface: "Wood chip trail"
+suggestedBy: "Pam Melvin"
+routeConditions:
+  aesthetics: 5
+  badWeatherRunning: 9
+  autoTraffic: 10
+routeMap:
+  src: "./map.jpg"
+  alt: "Hand-drawn course map for the Glendoveer loop"
+  caption: "Course map from the original book."
+---
+
+import RouteStats from "@/components/blog/RouteStats.astro";
+
+<RouteStats
+	routeNumber={frontmatter.routeNumber}
+	section={frontmatter.section}
+	distanceMiles={frontmatter.distanceMiles}
+	distanceKm={frontmatter.distanceKm}
+	difficulty={frontmatter.difficulty}
+	beginningPoint={frontmatter.beginningPoint}
+	runningSurface={frontmatter.runningSurface}
+	suggestedBy={frontmatter.suggestedBy}
+	conditions={frontmatter.routeConditions}
+/>
+
+<blockquote>
+
+The Glendoveer loop is the only one in this book that was built exclusively for running. Multnomah County added this trail to its Glendoveer Golf Course -- an idea that could be repeated in a number of Portland golf courses. In addition to the running, you can take part in the 10 "Vita" exercises that occur at different points along the trail. These consist of doing chin-ups, sit-ups, push-ups, etc., and will probably be seen by many runners as an unnecessary interruption to an otherwise lovely run. Whether of not you are interested in "Vita" exercises, give Glendoveer a try. The course winds through some beautiful wooded areas and the soft wood-chip trail is a welcome relief to feet used to pounding hard pavement.
+
+Glendoveer can be reached by traveling east on NE Glisan from 122nd. Look for the start of the trail about 1/4 mile to the right of the clubhouse. Water and restrooms are available at the clubhouse.
+
+</blockquote>
+
+![Hand-drawn course map for the Glendoveer loop](./map.jpg)
+
+_Course map from the original book._
+
+![A runner among tall trees on the Glendoveer wood-chip trail](./photo.jpg)
+
+_Photograph by Ancil Nance, from the original book._
+

@@ -1,0 +1,49 @@
+---
+title: "7. Laurelhurst Park"
+description: "Route 7 from Running Around Portland (1979): two short, flat paved loops (0.82 and 0.86 miles) around the lake and lawns of Laurelhurst Park."
+routeNumber: 7
+section: "North Portland & Near East Side"
+distanceMiles: 0.82
+distanceKm: 1.3
+distanceLabel: "Outside loop — 0.82 mi (1.3 km) · Figure-eight loop — 0.86 mi (1.4 km)"
+difficulty: 1
+beginningPoint: "By the restrooms on S.E. Ankeny, Laurelhurst Park"
+lat: 45.524
+lng: -122.623
+runningSurface: "Paved paths"
+routeConditions:
+  aesthetics: 7
+  badWeatherRunning: 10
+  autoTraffic: 10
+routeMap:
+  src: "./map.jpg"
+  alt: "Hand-drawn course map showing the outside loop and figure-eight run in Laurelhurst Park"
+  caption: "Course map from the original book."
+---
+
+import RouteStats from "@/components/blog/RouteStats.astro";
+
+<RouteStats
+	routeNumber={frontmatter.routeNumber}
+	section={frontmatter.section}
+	distanceMiles={frontmatter.distanceMiles}
+	distanceKm={frontmatter.distanceKm}
+	distanceLabel={frontmatter.distanceLabel}
+	difficulty={frontmatter.difficulty}
+	beginningPoint={frontmatter.beginningPoint}
+	runningSurface={frontmatter.runningSurface}
+	conditions={frontmatter.routeConditions}
+/>
+
+<blockquote>
+
+Laurelhurst Park sits right in the heart of the east side residential area and in nice weather is alive with joggers, stollers, sitters, and elderly citizens feeding ducks and swans. Easy access is assured by the park's location a block south of East Burnside. Park along Ankeny and enter along either of the walkways on that street.
+
+Run these loops either way and as many times as feels right. If you still feel energetic, venture out and jog around some of the local neighborhoods. On summer week-end days, enjoy a concert while you're doing your stretches on the grassy field along Oak Street.
+
+</blockquote>
+
+![Sunlit trees and the lakeshore in Laurelhurst Park](./photo.jpg)
+
+_Photograph by Ancil Nance, from the original book._
+

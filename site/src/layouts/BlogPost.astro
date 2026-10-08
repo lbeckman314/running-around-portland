@@ -1,0 +1,219 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import { Image } from "astro:assets";
+
+import Masthead from "@/components/blog/Masthead.astro";
+import RouteNav from "@/components/blog/RouteNav.astro";
+import TOC from "@/components/blog/TOC.astro";
+import WebMentions from "@/components/blog/webmentions/index.astro";
+
+import BaseLayout from "./Base.astro";
+
+interface Props {
+	post: CollectionEntry<"post">;
+	prevRoute?: CollectionEntry<"post"> | undefined;
+	nextRoute?: CollectionEntry<"post"> | undefined;
+}
+
+const { post, prevRoute, nextRoute } = Astro.props;
+const { ogImage, title, description, updatedDate, publishDate, routeMap, routeNumber } = post.data;
+const socialImage = ogImage ?? `/og-image/${post.id}.png`;
+const articleDate = updatedDate?.toISOString() ?? publishDate?.toISOString();
+const { headings } = await render(post);
+
+// Route posts transcribed from "Running Around Portland" render as a two-column
+// "book spread": stats + turn-by-turn directions on the left, the hand-drawn
+// course map pinned on the right.
+const isRoute = routeNumber !== undefined && routeMap !== undefined;
+
+const proseClasses =
+	"prose lg:prose-lg prose-headings:font-semibold prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-muted prose-headings:hover:before:text-accent sm:prose-headings:before:content-['#'] sm:prose-th:before:content-none";
+---
+
+<BaseLayout
+	wide={isRoute}
+	meta={{
+		articleDate,
+		description,
+		ogImage: socialImage,
+		title,
+	}}
+>
+	<article class="grow break-words" data-pagefind-body>
+		<div id="blog-hero" class="mb-12"><Masthead content={post} /></div>
+
+		{
+			isRoute ? (
+				<div class="flex flex-col gap-10 lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start lg:gap-12 xl:grid-cols-[minmax(0,1fr)_28rem]">
+					<div class:list={[proseClasses, "max-w-none"]}>
+						<slot />
+						<RouteNav prev={prevRoute} next={nextRoute} />
+						<WebMentions />
+					</div>
+					<figure class="not-prose order-first lg:sticky lg:top-24 lg:order-none">
+						<a
+							href={routeMap.src.src}
+							target="_blank"
+							rel="noopener"
+							aria-label="Open the full-size course map"
+							data-map-lightbox-open
+						>
+							<Image
+								alt={routeMap.alt}
+								src={routeMap.src}
+								widths={[360, 640, 960, routeMap.src.width]}
+								sizes="(min-width: 1024px) 24rem, 100vw"
+								class="border-muted/30 rounded-sm border bg-white"
+							/>
+						</a>
+						<figcaption class="text-muted mt-2 text-sm">
+							{routeMap.caption ?? "Course map from the original book."}{" "}
+							<a
+								class="cactus-link"
+								href={routeMap.src.src}
+								target="_blank"
+								rel="noopener"
+								data-map-lightbox-open
+							>
+								View full size
+							</a>
+						</figcaption>
+						<dialog
+							id="map-lightbox"
+							aria-label={routeMap.alt}
+							class="h-dvh max-h-none w-screen max-w-none overflow-auto overscroll-contain bg-transparent p-0 backdrop:bg-black/80"
+						>
+							<button
+								type="button"
+								class="fixed end-4 top-4 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-zinc-200 text-2xl text-zinc-900 hover:bg-white"
+								data-map-lightbox-close
+							>
+								<span class="sr-only">Close map</span>
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<div
+								class="flex min-h-full min-w-fit items-center justify-center p-4"
+								data-map-lightbox-backdrop
+							>
+								<img
+									alt={routeMap.alt}
+									src={routeMap.src.src}
+									width={routeMap.src.width}
+									height={routeMap.src.height}
+									loading="lazy"
+									decoding="async"
+									title="Click to zoom"
+									class="h-auto max-h-[95dvh] w-auto max-w-[95vw] cursor-zoom-in bg-white data-[zoomed=true]:max-h-none data-[zoomed=true]:max-w-none data-[zoomed=true]:cursor-zoom-out"
+									data-map-lightbox-image
+								/>
+							</div>
+						</dialog>
+					</figure>
+				</div>
+			) : (
+				<div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
+					{!!headings.length && <TOC headings={headings} />}
+					<div class={proseClasses}>
+						<slot />
+						<WebMentions />
+					</div>
+				</div>
+			)
+		}
+	</article>
+	<button
+		class="hover:border-link fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700"
+		data-show="false"
+		id="to-top-btn"
+	>
+		<span class="sr-only">Back to top</span>
+		<svg
+			aria-hidden="true"
+			class="h-6 w-6"
+			fill="none"
+			focusable="false"
+			stroke="currentColor"
+			stroke-width="2"
+			viewBox="0 0 24 24"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path d="M4.5 15.75l7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+		</svg>
+	</button>
+</BaseLayout>
+
+<script>
+	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement;
+	const targetHeader = document.getElementById("blog-hero") as HTMLDivElement;
+
+	function callback(entries: IntersectionObserverEntry[]) {
+		entries.forEach((entry) => {
+			// only show the scroll to top button when the heading is out of view
+			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
+		});
+	}
+
+	scrollBtn.addEventListener("click", () => {
+		document.documentElement.scrollTo({ behavior: "smooth", top: 0 });
+	});
+
+	const observer = new IntersectionObserver(callback);
+	observer.observe(targetHeader);
+
+	// Course-map lightbox: the map links still point at the full-size image, so
+	// without JS they just open it directly.
+	const lightbox = document.getElementById("map-lightbox") as HTMLDialogElement | null;
+	if (lightbox) {
+		const lightboxImg = lightbox.querySelector<HTMLImageElement>("[data-map-lightbox-image]")!;
+
+		document.querySelectorAll<HTMLAnchorElement>("[data-map-lightbox-open]").forEach((link) => {
+			link.addEventListener("click", (event) => {
+				// let modified clicks (new tab, etc.) behave normally
+				if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+				event.preventDefault();
+				lightboxImg.dataset.zoomed = "false";
+				lightbox.showModal();
+				document.documentElement.style.overflow = "hidden";
+			});
+		});
+
+		// <dialog> closes on Esc natively, but not every browser honors it every
+		// time (e.g. Chrome ignores repeat Escs without a click in between)
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && lightbox.open) {
+				event.preventDefault();
+				lightbox.close();
+			}
+		});
+
+		lightbox.addEventListener("close", () => {
+			document.documentElement.style.overflow = "";
+		});
+
+		// clicking the backdrop (anywhere outside the image) closes it
+		lightbox.addEventListener("click", (event) => {
+			const target = event.target as HTMLElement;
+			if (target === lightbox || target.hasAttribute("data-map-lightbox-backdrop"))
+				lightbox.close();
+		});
+
+		lightbox
+			.querySelector("[data-map-lightbox-close]")!
+			.addEventListener("click", () => lightbox.close());
+
+		// toggle between fit-to-screen and actual size, keeping the clicked spot in view
+		lightboxImg.addEventListener("click", (event) => {
+			const zoomed = lightboxImg.dataset.zoomed === "true";
+			const rect = lightboxImg.getBoundingClientRect();
+			const fx = (event.clientX - rect.left) / rect.width;
+			const fy = (event.clientY - rect.top) / rect.height;
+			lightboxImg.dataset.zoomed = (!zoomed).toString();
+			if (!zoomed) {
+				lightbox.scrollTo({
+					left: lightboxImg.offsetLeft + fx * lightboxImg.offsetWidth - window.innerWidth / 2,
+					top: lightboxImg.offsetTop + fy * lightboxImg.offsetHeight - window.innerHeight / 2,
+				});
+			}
+		});
+	}
+</script>

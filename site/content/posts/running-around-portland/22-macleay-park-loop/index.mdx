@@ -1,0 +1,60 @@
+---
+title: "22. Macleay Park Loop"
+description: "Route 22 from Running Around Portland (1979): a secluded 3.7-mile forested loop through Macleay Park and the Wildwood Trail to the Pittock Bird Sanctuary."
+routeNumber: 22
+section: "Near West Side"
+distanceMiles: 3.7
+distanceKm: 5.9
+difficulty: 5
+beginningPoint: "Macleay Park parking lot"
+lat: 45.534
+lng: -122.709
+runningSurface: "Dirt trail and paved road"
+routeConditions:
+  aesthetics: 9
+  badWeatherRunning: 4
+  autoTraffic: 8
+routeMap:
+  src: "./map.jpg"
+  alt: "Hand-drawn course map and elevation profile for the Macleay Park Loop"
+  caption: "Course map and elevation profile from the original book."
+---
+
+import RouteStats from "@/components/blog/RouteStats.astro";
+
+<RouteStats
+	routeNumber={frontmatter.routeNumber}
+	section={frontmatter.section}
+	distanceMiles={frontmatter.distanceMiles}
+	distanceKm={frontmatter.distanceKm}
+	difficulty={frontmatter.difficulty}
+	beginningPoint={frontmatter.beginningPoint}
+	runningSurface={frontmatter.runningSurface}
+	suggestedBy={frontmatter.suggestedBy}
+	conditions={frontmatter.routeConditions}
+/>
+
+<blockquote>
+
+If you're looking for a 30-40 minute run that is secluded, forested and easily accessible by car, try this one.
+
+Follow N.W. Lovejoy which becomes Cornell at 26th. Drive up Cornell through two tunnels to the Macleay Park parking lot on your right. There's a drinking fountain by the turn-in.
+
+Get on the Wildwood Trail at the east end of the parking lot, and descend steeply a hundred feet to Balch Creek. Cross the creek, stay on Wildwood and take the left fork at the stone hut. You'll be going uphill gradually for quite a distance, so take it easy and conserve your energy.
+
+At around 2½ miles turn left onto Birch Trail. Climb through Douglas fir and alder 1/4 mile to the parking lot on N.W. 53rd Drive. Go left on 53rd Drive as it descends steeply to Cornell. Turn left again on Cornell. Cross to the right side of Cornell where there is a broader shoulder. Now's a good time to stretch out your legs as you run 1/2 mile on a gentle downhill grade to the Pittock Bird Sanctuary and Oregon Audubon Society building. The last 1/4 mile is slightly uphill back to Macleay Park and your car.
+
+There's a drinking fountain by the park sign, where Wildwood crosses Cornell.
+
+</blockquote>
+
+![Hand-drawn course map and elevation profile for the Macleay Park Loop](./map.jpg)
+
+_Course map and elevation profile from the original book._
+
+![A runner on a dirt trail through the woods](./photo.jpg)
+
+_Photograph by Ancil Nance, from the original book._
+
+See also the [fold-out Wildwood Trail map](/posts/running-around-portland/wildwood-trail-fold-out-map/) covering this and the neighboring Forest Park loops.
+

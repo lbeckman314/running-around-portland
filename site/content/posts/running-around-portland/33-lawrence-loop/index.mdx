@@ -1,0 +1,56 @@
+---
+title: "33. Lawrence Loop"
+description: "Route 33 from Running Around Portland (1979): a 3.6-mile loop along shady Tualatin Valley country lanes west of West Linn."
+routeNumber: 33
+section: "Suburban West Side"
+distanceMiles: 3.6
+difficulty: 3
+beginningPoint: "Intersection of S. Rosemont and Wisteria Roads west of West Linn"
+lat: 45.373
+lng: -122.651
+runningSurface: "Paved and dirt roads"
+suggestedBy: "Julie and Ryan Lawrence"
+routeConditions:
+  aesthetics: 8
+  badWeatherRunning: 10
+  autoTraffic: 8
+routeMap:
+  src: "./map.jpg"
+  alt: "Hand-drawn course map and elevation profile for the Lawrence Loop"
+  caption: "Course map and elevation profile from the original book."
+---
+
+import RouteStats from "@/components/blog/RouteStats.astro";
+
+<RouteStats
+	routeNumber={frontmatter.routeNumber}
+	section={frontmatter.section}
+	distanceMiles={frontmatter.distanceMiles}
+	distanceKm={frontmatter.distanceKm}
+	difficulty={frontmatter.difficulty}
+	beginningPoint={frontmatter.beginningPoint}
+	runningSurface={frontmatter.runningSurface}
+	suggestedBy={frontmatter.suggestedBy}
+	conditions={frontmatter.routeConditions}
+/>
+
+<blockquote>
+
+This is a lovely loop along shady country lanes, with grazing animals and secluded rural homes backdropped by fine views of the Tualatin Valley country.
+
+To get to the Rosemont/Wisteria intersection, follow the directions in the Killer Kowalski run up Marylhurst Drive to Valleyview. Go left to Suncrest Avenue, then right, and you'll come out on Rosemont. Turn left and you'll come to Wisteria about 500 yds. east.
+
+If you want to start by running downhill and finish running uphill, park on the shoulder along Wisteria just below the STOP sign. You'll take a right at Clematis Road and follow that dirt road to Sweetbriar and turn left. At the next intersection, keep bearing right and the road turns into Grapevine. Now you'll be paralleling the Tualatin River (below on your right) as you descend to the valley floor at the Woodbine intersection before turning left and heading back up to your car.
+
+An alternative parking place is at the intersection of Woodbine and Grapevine Roads by the freeway. In that case, you start uphill and finish downhill.
+
+</blockquote>
+
+![Hand-drawn course map and elevation profile for the Lawrence Loop](./map.jpg)
+
+_Course map and elevation profile from the original book._
+
+![A person leaping over a fallen log while a child watches](./photo.jpg)
+
+_Photograph by Ancil Nance, from the original book._
+
