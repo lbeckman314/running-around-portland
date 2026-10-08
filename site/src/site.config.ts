@@ -3,7 +3,7 @@ import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
-	url: "https://runpdx.github.io",
+	url: "https://running-around-portland.github.io",
 	/*
 		- Used to construct the meta title property found in src/components/BaseHead.astro L:11
 		- The webmanifest name found in astro.config.ts L:42
@@ -28,8 +28,8 @@ export const siteConfig: SiteConfig = {
 	// Used to build "Edit on GitHub" links (src/utils/github.ts) and the
 	// source-code link on the About page.
 	repo: {
-		owner: "lbeckman314",
-		name: "running-around-portland",
+		owner: "running-around-portland",
+		name: "running-around-portland.github.io",
 		branch: "main",
 		dir: "site",
 	},
