@@ -1,5 +1,6 @@
 ---
-import { getAllPosts } from "@/data/post";
+import { withBase } from "@/utils/url";
+import { getAllPosts, postHref } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 
 const allPosts = await getAllPosts();
@@ -26,10 +27,10 @@ const meta = {
 	<p class="text-muted mb-4">
 		{routes.length} of the book's 44 routes from <em>Running Around Portland</em> (1979), grouped
 		by section as in the original book. See also the{" "}
-		<a class="cactus-link" href="/posts/running-around-portland/wildwood-trail-fold-out-map/">
+		<a class="cactus-link" href={withBase("/routes/wildwood-trail-fold-out-map/")}>
 			Wildwood Trail fold-out map
 		</a>{" "}
-		and the <a class="cactus-link" href="/appendix/">appendices</a>.
+		and the <a class="cactus-link" href={withBase("/appendix/")}>appendices</a>.
 	</p>
 	{
 		routes.length < 44 && (
@@ -50,7 +51,7 @@ const meta = {
 						{sectionRoutes.map((route) => (
 							<li class="grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-3">
 								<span class="text-muted text-right font-semibold">{route.data.routeNumber}.</span>
-								<a class="cactus-link" href={`/posts/${route.id}/`}>
+								<a class="cactus-link" href={postHref(route)}>
 									{route.data.title.replace(/^\d+\.\s*/, "")}
 								</a>
 								<span class="text-muted text-xs whitespace-nowrap">

@@ -1,4 +1,5 @@
 import { type CollectionEntry, getCollection } from "astro:content";
+import { withBase } from "@/utils/url";
 
 /** filter out draft posts based on the environment */
 export async function getAllPosts(): Promise<CollectionEntry<"post">[]> {
@@ -19,7 +20,7 @@ export function postSlug(post: CollectionEntry<"post">): string {
 
 /** The site-relative URL for a post's own page. */
 export function postHref(post: CollectionEntry<"post">): string {
-	return `/routes/${postSlug(post)}/`;
+	return withBase(`/routes/${postSlug(post)}/`);
 }
 
 /** groups posts by their book section (route posts) or publish year (dated posts), using that

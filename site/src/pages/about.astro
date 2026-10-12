@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@/utils/url";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
@@ -21,14 +22,14 @@ const meta = {
 		<p>
 			This site is a fan-made, non-commercial transcription of that book. Each route gets its own
 			page with the original map, any accompanying photo, and the route's text copied out
-			verbatim (typos and all) from the scanned original. The <a class="cactus-link" href="/">home page</a> lists all of them grouped by section, with distance and difficulty at a glance and a map
+			verbatim (typos and all) from the scanned original. The <a class="cactus-link" href={withBase("/")}>home page</a> lists all of them grouped by section, with distance and difficulty at a glance and a map
 			showing roughly where each one starts.
 		</p>
 		<p>Also transcribed from the book's back matter:</p>
 		<ul class="list-inside list-disc" role="list">
-			<li><a class="cactus-link" href="/appendix/running-organizations/">Running organizations and publications</a> active in 1979</li>
-			<li><a class="cactus-link" href="/appendix/annual-runs-calendar/">A calendar of annual organized runs</a> around Portland and Vancouver</li>
-			<li><a class="cactus-link" href="/appendix/calorie-table/">A calorie table</a> and <a class="cactus-link" href="/appendix/aerobic-point-tables/">aerobic point tables</a> for walking and running</li>
+			<li><a class="cactus-link" href={withBase("/appendix/running-organizations/")}>Running organizations and publications</a> active in 1979</li>
+			<li><a class="cactus-link" href={withBase("/appendix/annual-runs-calendar/")}>A calendar of annual organized runs</a> around Portland and Vancouver</li>
+			<li><a class="cactus-link" href={withBase("/appendix/calorie-table/")}>A calorie table</a> and <a class="cactus-link" href={withBase("/appendix/aerobic-point-tables/")}>aerobic point tables</a> for walking and running</li>
 		</ul>
 		<p>
 			A couple of things are still incomplete: two routes (Ester Short Park Run and Lacamas Lake
@@ -44,7 +45,7 @@ const meta = {
 			routes.
 		</p>
 		<p>
-			The source and transcription scripts are on <a class="cactus-link" href="https://github.com/running-around-portland/running-around-portland.github.io" rel="noreferrer" target="_blank">GitHub</a>.
+			The source and transcription scripts are on <a class="cactus-link" href="https://github.com/lbeckman314/running-around-portland" rel="noreferrer" target="_blank">GitHub</a>.
 		</p>
 	</div>
 </PageLayout>

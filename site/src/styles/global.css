@@ -78,6 +78,7 @@
 	--color-quote: #531a4a;
 	--color-section-band: #d1c8f4;
 	--color-chrome-band: #531a4a;
+	--color-chrome-band-edge: #ffcc00;
 	--font-shrikhand: "Shrikhand", cursive;
 	/* Long-form reading text. System serifs only (no download): New York /
 	   Iowan Old Style / Charter on Apple, Sitka / Cambria on Windows. */
@@ -96,6 +97,10 @@
 		color-scheme: light;
 		accent-color: var(--color-accent);
 		scrollbar-gutter: stable;
+		/* 100vw full-bleed pieces (.section-band, WaveEdge) include the scrollbar
+		   gutter where scrollbars are always shown; clip that sliver rather than
+		   letting it add a horizontal scroll. */
+		overflow-x: clip;
 		background-color: var(--color-global-bg);
 
 		&[data-theme="light"] {
@@ -204,7 +209,6 @@
 	}
 
 	li {
-		background: #f5e9e9;
 		/* Matches PostCard's own rounded-md (0.375rem) so this square-cornered
 		   background doesn't peek out past the card's rounded corners. */
 		border-radius: 0.375rem;

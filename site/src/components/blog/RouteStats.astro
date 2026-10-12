@@ -1,21 +1,23 @@
 ---
 interface Conditions {
-	aesthetics?: number;
-	badWeatherRunning?: number;
-	autoTraffic?: number;
+	aesthetics?: number | undefined;
+	badWeatherRunning?: number | undefined;
+	autoTraffic?: number | undefined;
 }
 
 interface Props {
-	routeNumber?: number;
-	section?: string;
-	distanceMiles?: number;
-	distanceKm?: number;
-	distanceLabel?: string;
-	difficulty?: number;
-	beginningPoint?: string;
-	runningSurface?: string;
-	suggestedBy?: string;
-	conditions?: Conditions;
+	routeNumber?: number | undefined;
+	section?: string | undefined;
+	distanceMiles?: number | undefined;
+	distanceKm?: number | undefined;
+	distanceLabel?: string | undefined;
+	difficulty?: number | undefined;
+	beginningPoint?: string | undefined;
+	runningSurface?: string | undefined;
+	suggestedBy?: string | undefined;
+	conditions?: Conditions | undefined;
+	/** Tighter layout for the home page hover card (no outer margin, fixed label column). */
+	compact?: boolean;
 }
 
 const {
@@ -29,7 +31,10 @@ const {
 	runningSurface,
 	suggestedBy,
 	conditions,
+	compact = false,
 } = Astro.props;
+
+const row = compact ? "grid grid-cols-[7.5rem_1fr] gap-x-2" : "grid gap-1 sm:grid-cols-[9rem_1fr]";
 
 const conditionRows: Array<[string, number | undefined]> = [
 	["Aesthetics", conditions?.aesthetics],
@@ -45,7 +50,10 @@ const distance =
 ---
 
 <aside
-	class="not-prose my-8 rounded-lg border border-muted/30 bg-quote/5 p-5"
+	class:list={[
+		"not-prose rounded-lg border border-muted/30",
+		compact ? "bg-global-bg p-4 text-sm" : "bg-quote/5 my-8 p-5",
+	]}
 	aria-label="Route stats"
 >
 	{
@@ -58,10 +66,10 @@ const distance =
 		)
 	}
 
-	<dl class="grid gap-3">
+	<dl class:list={["grid", compact ? "gap-2" : "gap-3"]}>
 		{
 			distance && (
-				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+				<div class={row}>
 					<dt class="text-sm font-semibold text-muted">Distance</dt>
 					<dd class="m-0">{distance}</dd>
 				</div>
@@ -70,7 +78,7 @@ const distance =
 
 		{
 			difficulty !== undefined && (
-				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+				<div class={row}>
 					<dt class="text-sm font-semibold text-muted">Difficulty</dt>
 					<dd class="m-0 flex items-center gap-2">
 						<span
@@ -90,7 +98,7 @@ const distance =
 
 		{
 			beginningPoint && (
-				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+				<div class={row}>
 					<dt class="text-sm font-semibold text-muted">Beginning point</dt>
 					<dd class="m-0">{beginningPoint}</dd>
 				</div>
@@ -99,7 +107,7 @@ const distance =
 
 		{
 			runningSurface && (
-				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+				<div class={row}>
 					<dt class="text-sm font-semibold text-muted">Running surface</dt>
 					<dd class="m-0">{runningSurface}</dd>
 				</div>
@@ -108,17 +116,31 @@ const distance =
 
 		{
 			conditionRows.some(([, value]) => value !== undefined) && (
-				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+				<div class={row}>
 					<dt class="text-sm font-semibold text-muted">
 						Conditions
 						<span class="block text-xs font-normal">(best = 10)</span>
 					</dt>
 					<dd class="m-0">
-						<ul class="grid list-none gap-1 p-0">
+						<ul class="grid list-none gap-2.5 p-0">
 							{conditionRows.map(([label, value]) =>
 								value !== undefined ? (
-									<li>
-										{label}: <strong>{value}</strong>/10
+									<li class="grid gap-1">
+										<span class="flex items-baseline justify-between gap-2">
+											<span>{label}</span>
+											<span class="tabular-nums">
+												<strong>{value}</strong>/10
+											</span>
+										</span>
+										<span
+											class="block h-2 w-full overflow-hidden rounded-full bg-muted/30"
+											aria-hidden="true"
+										>
+											<span
+												class="block h-full rounded-full bg-accent"
+												style={`width: ${(value / 10) * 100}%`}
+											/>
+										</span>
 									</li>
 								) : null,
 							)}
@@ -130,7 +152,7 @@ const distance =
 
 		{
 			suggestedBy && (
-				<div class="grid gap-1 sm:grid-cols-[9rem_1fr]">
+				<div class={row}>
 					<dt class="text-sm font-semibold text-muted">Suggested by</dt>
 					<dd class="m-0">{suggestedBy}</dd>
 				</div>

@@ -1,18 +1,20 @@
 ---
+import { stripBase, withBase } from "@/utils/url";
 import Search from "@/components/Search.astro";
+import WaveEdge from "@/components/layout/WaveEdge.astro";
 import { menuLinks } from "@/site.config";
 import { siteConfig } from "../../site.config";
 ---
 
 <header
-	class:list={["group full-bleed-bg relative mb-14 flex items-center pt-10 pb-8 text-white", siteConfig.showLogo && "sm:ps-18"]}
+	class:list={["group full-bleed-bg relative mb-20 flex items-center pt-10 pb-8 text-white", siteConfig.showLogo && "sm:ps-18"]}
 	id="main-header"
 >
 	<div class="flex sm:relative sm:flex-col sm:items-start">
 		<a
-			aria-current={Astro.url.pathname === "/" ? "page" : false}
-			class="group/logo inline-flex items-center sm:inline-block"
-			href="/"
+			aria-current={stripBase(Astro.url.pathname) === "/" ? "page" : false}
+			class="inline-flex items-center sm:inline-block"
+			href={withBase("/")}
 		>
 			{
 				siteConfig.showLogo && (
@@ -54,9 +56,9 @@ import { siteConfig } from "../../site.config";
 			{
 				menuLinks.map((link) => (
 					<a
-						aria-current={Astro.url.pathname === link.path ? "page" : false}
+						aria-current={stripBase(Astro.url.pathname) === link.path ? "page" : false}
 						class="px-2 py-4 font-semibold sm:px-4 sm:py-0 sm:underline-offset-2 sm:hover:underline"
-						href={link.path}
+						href={withBase(link.path)}
 					>
 						{link.title}
 					</a>
@@ -103,11 +105,12 @@ import { siteConfig } from "../../site.config";
 			</svg>
 		</button>
 	</mobile-button>
+	<WaveEdge edge="bottom" />
 </header>
 
 <style>
-	/* Small drops fall from above onto the umbrella's canopy on hover, instead
-	   of filling it. Sized in em against each <i>'s own text-[Npx], so they
+	/* Small drops fall from above onto the umbrella's canopy, instead of
+	   filling it. Sized in em against each <i>'s own text-[Npx], so they
 	   scale 2x along with the logo between the mobile and sm+ layouts without
 	   duplicating the keyframe math per breakpoint. */
 	.rain-drop {
@@ -121,10 +124,10 @@ import { siteConfig } from "../../site.config";
 		opacity: 0;
 	}
 
-	/* The animation only exists while hovered, rather than existing always
-	   and just being paused — that way un-hovering mid-fall snaps a drop back
-	   to this base (invisible) style instead of freezing it wherever it was. */
-	.group\/logo:hover .rain-drop {
+	/* Toggled per drop by the script below. Adding it starts a fresh cycle,
+	   and it's only ever removed at a cycle boundary (when the drop is
+	   invisible), so a drop never pops in or vanishes mid-fall. */
+	.rain-drop.falling {
 		animation: rain-fall 1.1s ease-in infinite;
 	}
 
@@ -165,4 +168,52 @@ import { siteConfig } from "../../site.config";
 	}
 
 	customElements.define("mobile-button", MobileNavBtn);
+
+	// A brief shower of three cycles plays on page load (unless the user prefers
+	// reduced motion), and it rains for as long as the header is hovered. When
+	// either ends, each drop finishes its current fall before stopping.
+	const header = document.getElementById("main-header");
+	const drops = [...(header?.querySelectorAll<HTMLElement>(".rain-drop") ?? [])];
+	const CYCLE_MS = 1100; // matches .rain-drop.falling's animation-duration
+	let hovering = false;
+	let showerStart = 0;
+	const loadCycles = matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 3;
+
+	// Drops stop one at a time, so re-hovering can catch some still finishing
+	// their last fall. Rather than restarting a stopped drop immediately (which
+	// can put it out of order, e.g. the first drop behind the second), hold it
+	// until the next cycle of the shower that's still running, so its
+	// animation-delay staggers it into its usual slot.
+	function startFalling(drop: HTMLElement) {
+		if (drop.classList.contains("falling")) return;
+		drop.classList.add("falling");
+		const now = Number(document.timeline.currentTime);
+		const cyclesElapsed = Math.ceil((now - showerStart) / CYCLE_MS);
+		const animation = drop.getAnimations()[0];
+		if (animation) animation.startTime = showerStart + cyclesElapsed * CYCLE_MS;
+	}
+
+	function startShower() {
+		if (!drops.some((drop) => drop.classList.contains("falling"))) {
+			showerStart = Number(document.timeline.currentTime);
+		}
+		for (const drop of drops) startFalling(drop);
+	}
+
+	for (const drop of drops) {
+		let cyclesLeft = loadCycles;
+		drop.addEventListener("animationiteration", () => {
+			cyclesLeft--;
+			if (cyclesLeft <= 0 && !hovering) drop.classList.remove("falling");
+		});
+	}
+	if (loadCycles > 0) startShower();
+
+	header?.addEventListener("mouseenter", () => {
+		hovering = true;
+		startShower();
+	});
+	header?.addEventListener("mouseleave", () => {
+		hovering = false;
+	});
 </script>

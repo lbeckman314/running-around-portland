@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
+import RouteStats from "@/components/blog/RouteStats.astro";
 import { postHref } from "@/data/post";
 
 // Home-page tile styled like an iOS home-screen app: a rounded-square "icon"
@@ -18,7 +19,11 @@ const meta = [
 ]
 	.filter((part) => part !== undefined)
 	.join(" · ");
+// Only routes get the hover card; e.g. the Wildwood fold-out has no stats to show.
+const hasStats = data.routeNumber !== undefined;
 ---
+
+<div class="route-app-wrap">
 
 <a class="route-app group flex flex-col items-center no-underline" href={postHref(post)}>
 	<span class="route-app-icon">
@@ -45,8 +50,108 @@ const meta = [
 	{meta && <span class="text-muted mt-0.5 text-center text-xs leading-tight">{meta}</span>}
 	{data.draft && <span class="text-xs font-semibold text-red-500">(Draft)</span>}
 </a>
+{
+	/* Visual preview only: the same stats are on the route page, so screen readers skip it
+	   rather than hearing every stat for every icon while tabbing through the grid. */
+	hasStats && (
+		<div class="route-app-pop" aria-hidden="true">
+			<RouteStats
+				compact
+				routeNumber={data.routeNumber}
+				section={data.section}
+				distanceMiles={data.distanceMiles}
+				distanceKm={data.distanceKm}
+				distanceLabel={data.distanceLabel}
+				difficulty={data.difficulty}
+				beginningPoint={data.beginningPoint}
+				runningSurface={data.runningSurface}
+				suggestedBy={data.suggestedBy}
+				conditions={data.routeConditions}
+			/>
+		</div>
+	)
+}
+</div>
+
+<script>
+	// Keep each card inside the page: icons in the outer grid columns would otherwise push a
+	// centred card past the viewport edge, which also makes the whole page scroll sideways
+	// (hidden cards still take up layout space). Re-run on resize since the column count is
+	// responsive.
+	const GUTTER = 16;
+	function placeAll() {
+		const pageWidth = document.documentElement.clientWidth;
+		for (const pop of document.querySelectorAll<HTMLElement>(".route-app-pop")) {
+			// Work from the icon's centre and the card's width rather than the card's own rect,
+			// which is mid-transition (transformed) whenever a card is opening or closing.
+			const wrap = pop.parentElement?.getBoundingClientRect();
+			if (!wrap) continue;
+			const left = wrap.left + wrap.width / 2 - pop.offsetWidth / 2;
+			const overLeft = GUTTER - left;
+			const overRight = left + pop.offsetWidth - (pageWidth - GUTTER);
+			const shift = overLeft > 0 ? overLeft : overRight > 0 ? -overRight : 0;
+			pop.style.setProperty("--shift", `${shift}px`);
+		}
+	}
+	placeAll();
+	let frame = 0;
+	window.addEventListener("resize", () => {
+		cancelAnimationFrame(frame);
+		frame = requestAnimationFrame(placeAll);
+	});
+</script>
 
 <style>
+	.route-app-wrap {
+		position: relative;
+	}
+
+	/* Hover card, opening above the icon (opening below would slide under the next
+	   section's band, which paints later). Hidden until hover or keyboard focus. */
+	.route-app-pop {
+		--shift: 0px;
+		position: absolute;
+		bottom: calc(100% + 0.5rem);
+		left: 50%;
+		z-index: 20;
+		width: min(22rem, calc(100vw - 2rem));
+		transform: translateX(calc(-50% + var(--shift))) translateY(4px);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		filter: drop-shadow(0 8px 20px rgb(0 0 0 / 0.18));
+		transition:
+			opacity 150ms ease,
+			transform 150ms ease,
+			visibility 0s linear 150ms;
+	}
+
+	.route-app-wrap:focus-within {
+		z-index: 20;
+	}
+
+	.route-app-wrap:focus-within .route-app-pop {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(calc(-50% + var(--shift)));
+		transition-delay: 0s;
+	}
+
+	/* Only real hover devices: on touch, a tap should just open the route. A short delay
+	   stops cards flashing open while the pointer sweeps across the grid. */
+	@media (hover: hover) {
+		.route-app-wrap:hover {
+			z-index: 20;
+		}
+
+		.route-app-wrap:hover .route-app-pop {
+			opacity: 1;
+			visibility: visible;
+			transform: translateX(calc(-50% + var(--shift)));
+			transition-delay: 250ms;
+		}
+	}
+
 	.route-app {
 		width: 100%;
 		max-width: 7.5rem;

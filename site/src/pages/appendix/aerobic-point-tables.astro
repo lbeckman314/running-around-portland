@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@/utils/url";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
@@ -24,13 +25,13 @@ const meta = {
 	</div>
 	<figure class="not-prose mt-6">
 		<img
-			src="/appendix/aerobic-point-tables.jpg"
+			src={withBase("/appendix/aerobic-point-tables.jpg")}
 			alt="Aerobic point tables for running and walking distances from 1 to 15 miles, giving a point score by finishing time"
 			class="w-full rounded-sm border border-muted/30 bg-white"
 		/>
 		<figcaption class="text-muted mt-2 text-sm">Scanned from the original book.</figcaption>
 	</figure>
 	<p class="mt-12">
-		<a class="cactus-link" href="/appendix/">← Back to appendices</a>
+		<a class="cactus-link" href={withBase("/appendix/")}>← Back to appendices</a>
 	</p>
 </PageLayout>

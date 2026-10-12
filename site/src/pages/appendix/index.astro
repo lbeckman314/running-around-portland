@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@/utils/url";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
@@ -39,7 +40,7 @@ const pages = [
 		{
 			pages.map((p) => (
 				<li>
-					<a class="cactus-link text-lg font-semibold" href={p.href}>
+					<a class="cactus-link text-lg font-semibold" href={withBase(p.href)}>
 						{p.title}
 					</a>
 					<p class="text-muted mt-1 text-sm">{p.description}</p>

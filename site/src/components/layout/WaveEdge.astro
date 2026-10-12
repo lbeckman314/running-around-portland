@@ -1,0 +1,37 @@
+---
+/* A full-viewport-width wavy edge hung off the header's bottom or the
+   footer's top, à la worldwidesidewalkjoy.com/the-map: the band colour fills
+   down (or up) to an S-curve, with an outline drawn along just the curve.
+   The parent must be position: relative. */
+interface Props {
+	edge: "top" | "bottom";
+}
+
+const { edge } = Astro.props;
+
+// Drawn as the header's bottom edge (band on top, curve below); the footer's
+// top edge is the same shape flipped upside down and mirrored, so the two
+// don't look identical.
+const curve = "M0,20 C480,140 960,-60 1440,50";
+---
+
+<svg
+	aria-hidden="true"
+	class:list={[
+		"pointer-events-none absolute left-[calc(50%-50vw)] h-14 w-screen",
+		edge === "bottom" ? "top-[calc(100%-1px)]" : "bottom-[calc(100%-1px)] -scale-100",
+	]}
+	focusable="false"
+	preserveAspectRatio="none"
+	viewBox="0 0 1440 100"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<path d={`M0,0 H1440 V50 C960,-60 480,140 0,20 Z`} fill="var(--color-chrome-band)"></path>
+	<path
+		d={curve}
+		fill="none"
+		stroke="var(--color-chrome-band-edge)"
+		stroke-linecap="round"
+		stroke-width="4"
+		vector-effect="non-scaling-stroke"></path>
+</svg>

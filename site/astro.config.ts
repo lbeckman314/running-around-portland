@@ -21,6 +21,9 @@ import { expressiveCodeOptions, siteConfig } from "./src/site.config";
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.url,
+	// Served by GitHub Pages as a project site under the user domain:
+	// https://liambeckman.com/running-around-portland/
+	base: "/running-around-portland",
 	image: {
 		domains: ["webmention.io"],
 	},
@@ -53,7 +56,7 @@ export default defineConfig({
 					type: "image/png",
 				},
 			],
-			start_url: "/",
+			start_url: "/running-around-portland/",
 			background_color: "#1d1f21",
 			theme_color: "#2bbc8a",
 			display: "standalone",
