@@ -18,12 +18,15 @@ import {
 } from "./src/plugins/satteri";
 import { expressiveCodeOptions, siteConfig } from "./src/site.config";
 
+// Sub-path the site is served from. Defaults to the GitHub Pages project path
+// (https://liambeckman.com/running-around-portland/); override with e.g.
+// `BASE_PATH=/ pnpm build` to serve from the domain root.
+const base = `/${(process.env.BASE_PATH || "/running-around-portland").replace(/^\/+|\/+$/g, "")}`;
+
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.url,
-	// Served by GitHub Pages as a project site under the user domain:
-	// https://liambeckman.com/running-around-portland/
-	base: "/running-around-portland",
+	base,
 	image: {
 		domains: ["webmention.io"],
 	},
@@ -56,7 +59,7 @@ export default defineConfig({
 					type: "image/png",
 				},
 			],
-			start_url: "/running-around-portland/",
+			start_url: base === "/" ? "/" : `${base}/`,
 			background_color: "#1d1f21",
 			theme_color: "#2bbc8a",
 			display: "standalone",

@@ -57,7 +57,7 @@ const mapRoutes = allPosts
 							<h2 id={`group-${slugify(groupKey)}`} class="title text-accent text-xlg">
 								{groupKey}
 							</h2>
-							<ul class="mt-5 grid grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+							<ul class="mt-5 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
 								{groupedPosts[groupKey]?.map((p) => (
 									<li class="bg-transparent!">
 										<RouteAppIcon post={p} />

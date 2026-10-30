@@ -10,7 +10,7 @@ import { siteConfig } from "../../site.config";
 	class:list={["group full-bleed-bg relative mb-20 flex items-center pt-10 pb-8 text-white", siteConfig.showLogo && "sm:ps-18"]}
 	id="main-header"
 >
-	<div class="flex sm:relative sm:flex-col sm:items-start">
+	<div class="flex flex-col items-start sm:relative">
 		<a
 			aria-current={stripBase(Astro.url.pathname) === "/" ? "page" : false}
 			class="inline-flex items-center sm:inline-block"
@@ -18,7 +18,7 @@ import { siteConfig } from "../../site.config";
 		>
 			{
 				siteConfig.showLogo && (
-				<span class="relative me-3 inline-block h-12 w-7 sm:absolute sm:-inset-s-18 sm:top-1/2 sm:me-0 sm:h-24 sm:w-14 sm:-translate-y-1/2">
+				<span class="relative me-3 inline-block h-20 w-12 shrink-0 sm:absolute sm:-inset-s-18 sm:top-1/2 sm:me-0 sm:h-24 sm:w-14 sm:-translate-y-1/2">
 					<svg
 						aria-hidden="true"
 						class="h-full w-full text-[#ffcc00]"
@@ -39,15 +39,15 @@ import { siteConfig } from "../../site.config";
 							stroke-linejoin="round"
 						></path>
 					</svg>
-					<i class="rain-drop text-[12px] sm:text-[24px]" style="left: 22%"></i>
-					<i class="rain-drop text-[12px] sm:text-[24px]" style="left: 48%; animation-delay: 250ms"></i>
-					<i class="rain-drop text-[12px] sm:text-[24px]" style="left: 74%; animation-delay: 500ms"></i>
+					<i class="rain-drop text-[20px] sm:text-[24px]" style="left: 22%"></i>
+					<i class="rain-drop text-[20px] sm:text-[24px]" style="left: 48%; animation-delay: 250ms"></i>
+					<i class="rain-drop text-[20px] sm:text-[24px]" style="left: 74%; animation-delay: 500ms"></i>
 				</span>
 				)
 			}
 			<span class="text-xl font-shrikhand sm:text-2xl">{siteConfig.title}</span>
 		</a>
-		<span class="text-sm">By {siteConfig.author}</span>
+		<span class:list={["mt-1 text-sm", siteConfig.showLogo && "ps-15 sm:ps-0"]}>By {siteConfig.author}</span>
 		<nav
 			aria-label="Main"
 			class="bg-chrome-band absolute -inset-x-4 top-full hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-y-0 sm:bg-transparent sm:p-0"
